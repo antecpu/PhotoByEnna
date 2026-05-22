@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Photo by Enna — Nagrađivana fotografkinja specijalizirana za vjenčanja, portrete i editorijale. Bilježim emocije, svjetlost i bezvremenski trenutke.">
+<meta name="keywords" content="fotografija, vjenčanja, portreti, moda, editorijal, cinematska fotografija">
+<meta property="og:title" content="Photo by Enna">
+<meta property="og:description" content="Bilježim emocije, svjetlost i bezvremenski trenutke.">
+<title>Photo by Enna</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0d0d0d; --bg2: #141414; --bg3: #1a1a1a;
+    --text: #f0ece4; --text-muted: #888070; --text-dim: #4a4640;
+    --accent: #c8a96e; --accent-light: #e8d5a8; --accent-dark: #8a6e3a;
+    --border: rgba(200,169,110,0.15); --border-subtle: rgba(255,255,255,0.06);
+    --white: #f7f3ec;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-weight: 300; overflow-x: hidden; cursor: none; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E"); opacity: 0.025; pointer-events: none; z-index: 9999; }
+  .cursor { position: fixed; width: 10px; height: 10px; background: var(--accent); border-radius: 50%; pointer-events: none; z-index: 10000; transform: translate(-50%,-50%); transition: transform .1s ease, width .3s ease, height .3s ease; }
+  .cursor-ring { position: fixed; width: 40px; height: 40px; border: 1px solid rgba(200,169,110,.5); border-radius: 50%; pointer-events: none; z-index: 10000; transform: translate(-50%,-50%); transition: transform .15s ease, width .3s ease, height .3s ease, border-color .3s ease; }
+  .cursor.hover { width: 6px; height: 6px; }
+  .cursor-ring.hover { width: 60px; height: 60px; border-color: var(--accent); }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 28px 60px; display: flex; align-items: center; justify-content: space-between; transition: padding .4s ease, background .4s ease, backdrop-filter .4s ease; }
+  nav.scrolled { padding: 18px 60px; background: rgba(13,13,13,.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-subtle); }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 400; letter-spacing: .08em; color: var(--white); text-decoration: none; font-style: italic; }
+  .nav-links { display: flex; gap: 44px; list-style: none; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; transition: color .3s ease; font-weight: 400; }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta { border: 1px solid var(--border); padding: 10px 24px; font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-light) !important; transition: background .3s ease, border-color .3s ease !important; }
+  .nav-cta:hover { background: rgba(200,169,110,.08) !important; border-color: var(--accent) !important; }
+  .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .nav-hamburger span { display: block; width: 24px; height: 1px; background: var(--text); transition: all .3s ease; }
+
+  .hero { position: relative; height: 100vh; min-height: 700px; display: flex; align-items: flex-end; justify-content: flex-start; overflow: hidden; }
+  .hero-bg-img { position: absolute; inset: 0; background-size: cover; background-position: center 30%; background-repeat: no-repeat; transition: transform .1s linear; }
+  .hero-bg-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,6,4,.92) 0%, rgba(8,6,4,.5) 40%, rgba(8,6,4,.25) 100%); }
+  .hero-content { position: relative; z-index: 2; padding: 0 60px 80px; max-width: 800px; }
+  .hero-eyebrow { font-size: .65rem; letter-spacing: .3em; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; opacity: 0; transform: translateY(20px); animation: fadeUp 1s ease .3s forwards; display: block; }
+  .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(3.5rem,8vw,7rem); font-weight: 400; line-height: .95; letter-spacing: -.02em; color: var(--white); margin-bottom: 32px; opacity: 0; transform: translateY(30px); animation: fadeUp 1.2s ease .5s forwards; }
+  .hero-title em { font-style: italic; color: var(--accent-light); }
+  .hero-subtitle { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 300; font-style: italic; color: var(--text-muted); letter-spacing: .04em; margin-bottom: 48px; opacity: 0; transform: translateY(20px); animation: fadeUp 1s ease .8s forwards; }
+  .hero-actions { display: flex; align-items: center; gap: 40px; opacity: 0; transform: translateY(20px); animation: fadeUp 1s ease 1s forwards; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 12px; background: var(--accent); color: #0d0d0d; padding: 16px 36px; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; font-weight: 500; transition: background .3s ease, transform .3s ease; }
+  .btn-primary:hover { background: var(--accent-light); transform: translateY(-2px); }
+  .btn-ghost { display: inline-flex; align-items: center; gap: 10px; color: var(--text-muted); font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; text-decoration: none; transition: color .3s ease; border-bottom: 1px solid transparent; padding-bottom: 2px; }
+  .btn-ghost:hover { color: var(--accent-light); border-bottom-color: var(--accent); }
+  .hero-scroll-hint { position: absolute; bottom: 32px; right: 60px; display: flex; align-items: center; gap: 12px; color: var(--text-dim); font-size: .65rem; letter-spacing: .2em; text-transform: uppercase; z-index: 2; opacity: 0; animation: fadeUp 1s ease 1.4s forwards; }
+  .scroll-line { width: 40px; height: 1px; background: var(--text-dim); position: relative; overflow: hidden; }
+  .scroll-line::after { content: ''; position: absolute; left: -100%; top: 0; width: 100%; height: 1px; background: var(--accent); animation: scrollLine 2s ease-in-out infinite 1.6s; }
+  @keyframes scrollLine { 0%{left:-100%} 100%{left:100%} }
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+  section { padding: 120px 60px; }
+  .section-eyebrow { font-size: .63rem; letter-spacing: .3em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; display: block; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem,4vw,3.5rem); font-weight: 400; line-height: 1.1; color: var(--white); margin-bottom: 20px; }
+  .section-title em { font-style: italic; color: var(--accent-light); }
+  .divider { width: 1px; height: 80px; background: linear-gradient(to bottom, transparent, var(--accent), transparent); margin: 0 auto; display: block; }
+
+  #portfolio { padding: 80px 40px 120px; }
+  .portfolio-header { text-align: center; padding: 0 20px 60px; }
+  .portfolio-header p { color: var(--text-muted); font-size: .95rem; font-weight: 300; letter-spacing: .04em; max-width: 500px; margin: 0 auto 48px; }
+  .category-filters { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 60px; }
+  .filter-btn { padding: 8px 22px; border: 1px solid var(--border-subtle); background: none; color: var(--text-muted); font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; cursor: pointer; transition: all .3s ease; font-family: 'Inter', sans-serif; }
+  .filter-btn:hover, .filter-btn.active { background: rgba(200,169,110,.1); border-color: var(--accent); color: var(--accent-light); }
+
+  .masonry-grid { columns: 3; column-gap: 14px; max-width: 1400px; margin: 0 auto; }
+  .masonry-item { break-inside: avoid; margin-bottom: 14px; position: relative; overflow: hidden; cursor: pointer; }
+  .masonry-item img { width: 100%; display: block; transition: transform .6s cubic-bezier(.25,.46,.45,.94); object-fit: cover; }
+  .masonry-item:hover img { transform: scale(1.04); }
+  .masonry-item .overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.88) 0%, rgba(0,0,0,.2) 50%, transparent 100%); opacity: 0; transition: opacity .4s ease; display: flex; align-items: flex-end; padding: 24px; }
+  .masonry-item:hover .overlay { opacity: 1; }
+  .overlay-content .tag { font-size: .58rem; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 4px; }
+  .overlay-content h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 400; color: var(--white); font-style: italic; }
+
+  .img-tall { aspect-ratio: 2/3; }
+  .img-wide { aspect-ratio: 3/2; }
+  .img-sq { aspect-ratio: 1/1; }
+  .masonry-item img { height: 100%; position: absolute; inset: 0; width: 100%; }
+  .masonry-item .img-wrap { position: relative; overflow: hidden; }
+
+  .lightbox { position: fixed; inset: 0; background: rgba(5,5,5,.97); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .4s ease; }
+  .lightbox.open { opacity: 1; pointer-events: all; }
+  .lightbox-inner { position: relative; width: 90vw; max-width: 1000px; max-height: 90vh; }
+  .lightbox-img { width: 100%; max-height: 80vh; object-fit: contain; display: block; }
+  .lightbox-close { position: absolute; top: -48px; right: 0; background: none; border: none; color: var(--text-muted); font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; cursor: pointer; padding: 8px; transition: color .3s ease; font-family: 'Inter', sans-serif; }
+  .lightbox-close:hover { color: var(--accent); }
+  .lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); background: none; border: 1px solid var(--border); color: var(--text-muted); width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all .3s ease; font-size: 1.2rem; }
+  .lightbox-nav:hover { background: rgba(200,169,110,.1); color: var(--accent); border-color: var(--accent); }
+  .lightbox-prev { left: -70px; } .lightbox-next { right: -70px; }
+  .lightbox-meta { margin-top: 20px; text-align: center; }
+  .lightbox-meta .tag { font-size: .6rem; letter-spacing: .25em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; display: block; }
+  .lightbox-meta h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-style: italic; font-weight: 400; color: var(--text); }
+
+  #about { background: var(--bg2); position: relative; overflow: hidden; }
+  #about::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, var(--accent), transparent); opacity: .3; }
+  .about-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
+  .about-photo-wrap { position: relative; }
+  .about-photo-wrap img { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; filter: grayscale(20%) contrast(1.05); }
+  .about-photo-frame { position: absolute; inset: -12px; border: 1px solid var(--border); pointer-events: none; transform: translate(12px,12px); }
+  .about-photo-label { position: absolute; bottom: -24px; right: 0; font-size: .6rem; letter-spacing: .22em; text-transform: uppercase; color: var(--text-dim); }
+  .about-text .section-title { margin-bottom: 32px; }
+  .about-body { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; line-height: 1.85; color: #8a8070; font-style: italic; margin-bottom: 32px; }
+  .about-body strong { color: var(--text-muted); font-style: normal; font-weight: 400; }
+  .about-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 32px; margin-top: 52px; padding-top: 40px; border-top: 1px solid var(--border-subtle); }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 400; color: var(--accent); line-height: 1; display: block; margin-bottom: 6px; }
+  .stat-label { font-size: .65rem; letter-spacing: .2em; text-transform: uppercase; color: var(--text-dim); }
+
+  #services { position: relative; }
+  .services-header { max-width: 1200px; margin: 0 auto 80px; }
+  .services-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+  .service-card { background: var(--bg2); padding: 48px 40px; position: relative; overflow: hidden; transition: background .4s ease; border: 1px solid transparent; cursor: pointer; }
+  .service-card:hover { background: var(--bg3); border-color: var(--border); }
+  .service-card::before { content: ''; position: absolute; top: 0; left: 0; width: 0; height: 2px; background: var(--accent); transition: width .4s ease; }
+  .service-card:hover::before { width: 100%; }
+  .service-num { font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--text-dim); font-style: italic; line-height: 1; margin-bottom: 32px; transition: color .4s ease; }
+  .service-card:hover .service-num { color: var(--accent-dark); }
+  .service-name { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 400; color: var(--white); margin-bottom: 16px; }
+  .service-desc { font-size: .85rem; line-height: 1.75; color: var(--text-muted); font-weight: 300; margin-bottom: 28px; }
+  .service-price { display: flex; align-items: baseline; gap: 6px; margin-bottom: 20px; }
+  .price-from { font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--text-dim); }
+  .price-val { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 400; color: var(--accent); }
+  .price-unit { font-size: .75rem; color: var(--text-dim); }
+  .service-includes { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .service-includes li { font-size: .78rem; color: var(--text-muted); display: flex; align-items: center; gap: 10px; font-weight: 300; }
+  .service-includes li::before { content: ''; width: 16px; height: 1px; background: var(--accent); flex-shrink: 0; }
+
+  #testimonials { background: var(--bg2); position: relative; overflow: hidden; text-align: center; }
+  #testimonials::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, var(--accent), transparent); opacity: .25; }
+  .testimonials-inner { max-width: 1100px; margin: 0 auto; }
+  .testimonials-inner .section-title { margin-bottom: 70px; }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+  .testimonial { padding: 48px 36px; background: var(--bg); position: relative; text-align: left; }
+  .testimonial-quote { font-family: 'Playfair Display', serif; font-size: 4rem; line-height: .5; color: var(--accent); opacity: .3; margin-bottom: 20px; display: block; font-style: italic; }
+  .testimonial p { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; line-height: 1.8; color: #706858; font-style: italic; margin-bottom: 28px; }
+  .testimonial-author { display: flex; align-items: center; gap: 14px; }
+  .author-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--bg3); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: .8rem; color: var(--accent); flex-shrink: 0; }
+  .author-name { font-size: .78rem; letter-spacing: .1em; color: var(--text-muted); display: block; margin-bottom: 2px; }
+  .author-role { font-size: .65rem; letter-spacing: .15em; text-transform: uppercase; color: var(--text-dim); }
+
+  #contact { position: relative; overflow: hidden; }
+  #contact::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 40%; background: radial-gradient(ellipse 60% 100% at 50% 100%, rgba(200,169,110,.04) 0%, transparent 70%); pointer-events: none; }
+  .contact-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.4fr; gap: 100px; align-items: start; }
+  .contact-info .section-title { margin-bottom: 28px; }
+  .contact-info p { color: var(--text-muted); font-size: .9rem; line-height: 1.8; font-weight: 300; margin-bottom: 52px; }
+  .contact-details { display: flex; flex-direction: column; gap: 24px; }
+  .contact-detail { display: flex; align-items: flex-start; gap: 16px; }
+  .contact-detail-icon { width: 36px; height: 36px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+  .contact-detail-icon svg { width: 14px; height: 14px; stroke: var(--accent); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .contact-detail-label { font-size: .6rem; letter-spacing: .22em; text-transform: uppercase; color: var(--text-dim); display: block; margin-bottom: 3px; }
+  .contact-detail-val { font-size: .88rem; color: var(--text-muted); font-weight: 300; }
+  .social-links { display: flex; gap: 12px; margin-top: 52px; padding-top: 40px; border-top: 1px solid var(--border-subtle); }
+  .social-link { width: 44px; height: 44px; border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--text-muted); transition: all .3s ease; }
+  .social-link:hover { border-color: var(--accent); color: var(--accent-light); background: rgba(200,169,110,.06); }
+  .social-link svg { width: 16px; height: 16px; fill: currentColor; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { position: relative; margin-bottom: 16px; }
+  .form-group label { display: block; font-size: .62rem; letter-spacing: .22em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 10px; }
+  .form-group input, .form-group select, .form-group textarea { width: 100%; background: var(--bg2); border: 1px solid var(--border-subtle); border-bottom: 1px solid rgba(200,169,110,.2); color: var(--text); font-family: 'Inter', sans-serif; font-size: .88rem; font-weight: 300; padding: 14px 16px; outline: none; transition: border-color .3s ease, background .3s ease; -webkit-appearance: none; border-radius: 0; }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--accent); background: rgba(200,169,110,.03); }
+  .form-group textarea { resize: vertical; min-height: 140px; }
+  .form-group select option { background: var(--bg2); }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: var(--text-dim); font-size: .82rem; }
+  .form-submit { margin-top: 12px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+  .submit-note { font-size: .7rem; color: var(--text-dim); letter-spacing: .05em; }
+  .btn-submit { padding: 16px 44px; background: none; border: 1px solid var(--accent); color: var(--accent-light); font-family: 'Inter', sans-serif; font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; cursor: pointer; transition: all .3s ease; }
+  .btn-submit:hover { background: var(--accent); color: #0d0d0d; font-weight: 500; }
+
+  footer { padding: 52px 60px 40px; border-top: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between; }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-style: italic; color: var(--text-muted); font-weight: 400; letter-spacing: .06em; }
+  .footer-copy { font-size: .68rem; letter-spacing: .1em; color: var(--text-dim); text-align: center; }
+  .footer-links { display: flex; gap: 28px; }
+  .footer-links a { font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; color: var(--text-dim); text-decoration: none; transition: color .3s ease; }
+  .footer-links a:hover { color: var(--accent); }
+
+  .fade-in { opacity: 0; transform: translateY(30px); transition: opacity .8s ease, transform .8s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+  .fade-in-delay-1 { transition-delay: .15s; }
+  .fade-in-delay-2 { transition-delay: .3s; }
+
+  .mobile-menu { display: none; position: fixed; inset: 0; background: var(--bg); z-index: 1001; flex-direction: column; align-items: center; justify-content: center; gap: 36px; opacity: 0; transition: opacity .3s ease; }
+  .mobile-menu.open { display: flex; opacity: 1; }
+  .mobile-menu a { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 400; color: var(--text-muted); text-decoration: none; font-style: italic; transition: color .3s ease; }
+  .mobile-menu a:hover { color: var(--accent-light); }
+  .mobile-close { position: fixed; top: 22px; right: 28px; background: none; border: none; color: var(--text-muted); font-size: 1.6rem; cursor: pointer; font-family: 'Inter', sans-serif; z-index: 1002; line-height: 1; padding: 4px; }
+
+  .img-wrap { background: var(--bg3); }
+  .masonry-item img { transition: opacity .5s ease, transform .6s cubic-bezier(.25,.46,.45,.94); }
+  .masonry-item img.loading { opacity: 0; }
+  .masonry-item img.loaded { opacity: 1; }
+
+  @media (max-width:1100px) {
+    .masonry-grid { columns: 2; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr 1fr; }
+    .about-inner { grid-template-columns: 1fr; gap: 60px; max-width: 680px; }
+    .about-photo-wrap { max-width: 400px; }
+  }
+  @media (max-width:768px) {
+    nav { padding: 22px 28px; } nav.scrolled { padding: 14px 28px; }
+    .nav-links { display: none; } .nav-cta { display: none; }
+    .nav-hamburger { display: flex; }
+    section { padding: 80px 28px; }
+    #portfolio { padding: 60px 20px 80px; }
+    .hero-content { padding: 0 28px 60px; }
+    .hero-scroll-hint { right: 28px; }
+    .masonry-grid { columns: 1; }
+    .services-grid { grid-template-columns: 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .contact-inner { grid-template-columns: 1fr; gap: 60px; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 20px; text-align: center; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+    .lightbox-prev { left: 8px; } .lightbox-next { right: 8px; }
+    .about-stats { grid-template-columns: repeat(3,1fr); gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="closeMobileMenu()">✕</button>
+  <a href="#hero" onclick="closeMobileMenu()">Početna</a>
+  <a href="#portfolio" onclick="closeMobileMenu()">Portfolio</a>
+  <a href="#about" onclick="closeMobileMenu()">O meni</a>
+  <a href="#services" onclick="closeMobileMenu()">Usluge</a>
+  <a href="#contact" onclick="closeMobileMenu()">Kontakt</a>
+</div>
+
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">photo by Enna</a>
+  <ul class="nav-links">
+    <li><a href="#hero">Početna</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#about">O meni</a></li>
+    <li><a href="#services">Usluge</a></li>
+    <li><a href="#contact" class="nav-cta">Rezerviraj termin</a></li>
+  </ul>
+  <div class="nav-hamburger" id="hamburger" onclick="openMobileMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg-img" id="heroBg" style="background-image: url('https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=1920&q=80&fit=crop&crop=top')"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">Nagrađivana fotografkinja · Od 2014.</span>
+    <h1 class="hero-title">photo by<br><em>Enna</em></h1>
+    <p class="hero-subtitle">Bilježim emocije, svjetlost i bezvremenski trenutke.</p>
+    <div class="hero-actions">
+      <a href="#portfolio" class="btn-primary">
+        Pogledaj portfolio
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="7" x2="12" y2="7"/><polyline points="7,2 12,7 7,12"/></svg>
+      </a>
+      <a href="#contact" class="btn-ghost">
+        Rezerviraj termin
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="1" y1="6" x2="11" y2="6"/><polyline points="6,1 11,6 6,11"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">
+    <div class="scroll-line"></div>
+    Skrolaj
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="portfolio-header fade-in">
+    <span class="section-eyebrow">Odabrani radovi</span>
+    <h2 class="section-title">Moj <em>Portfolio</em></h2>
+    <p>Kurirani izbor trenutaka — gdje se svjetlost susreće s pričom, a emocija nadilazi vrijeme.</p>
+  </div>
+  <div class="category-filters fade-in fade-in-delay-1">
+    <button class="filter-btn active" data-filter="all">Svi radovi</button>
+    <button class="filter-btn" data-filter="portrait">Portreti</button>
+    <button class="filter-btn" data-filter="fashion">Moda</button>
+    <button class="filter-btn" data-filter="wedding">Vjenčanja</button>
+    <button class="filter-btn" data-filter="street">Ulična</button>
+    <button class="filter-btn" data-filter="cinematic">Cinematska</button>
+  </div>
+  <div class="masonry-grid" id="gallery">
+
+    <div class="masonry-item" data-cat="portrait" data-title="Zlatni sat" data-sub="Portret" data-full="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=1400&q=90">
+      <div class="img-wrap img-tall">
+        <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=700&q=80&fit=crop" alt="Portret — Zlatni sat" class="loading" loading="lazy">
+      </div>
+      <div class="overlay"><div class="overlay-content"><span class="tag">Portret</span><h3>Zlatni sat</h3></div></div>
+    </div>
+
+    <div class="masonry-item" data-cat="fashion" data-title="Noir editorijal" data-sub="Moda" data-full="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1400&q=90">
+      <div class="img-wrap img-wide">
+        <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=700&q=80&fit=crop" alt="Noir editorijal" class="loading" loading="lazy">
+      </div>
+      <div class="overlay"><div class="overlay-content"><span class="tag">Moda</span><h3>Noir editorijal</h3></div></div>
+    </div>
+
+    <div class="masonry-item" data-cat="wedding" data-title="Prvo jutro" data-sub="Vjenčanje" data-full="https://images.unsplash.com/photo-1519741497674-611481863552?w=1400&q=90">
+      <div class="img-wrap img-tall">
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=700&q=80&fit=crop" alt="Vjenčanje — Prvo jutro" class="loading" loading="lazy">
+      </div>
+      <div class="overlay"><div class="overlay-content"><span class="tag">Vjenčanje</span><h3>Prvo jutro</h3></div></div>
+    </div>
+
+    <div class="masonry-item" data-cat="cinematic" data-title="Sumrak" data-sub="Cinematska" data-full="https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?w=1400&q=90">
+      <div class="img-wrap img-sq">
+        <img src="https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?w=700&q=80&fit=crop" alt="Cinematska — Sumrak" class="loading" loading="lazy">
+      </div>
+      <div class="overlay"><div class="overlay-content"><span class="tag">Cinematska</span><h3>Sumrak</h3></div></div>
+    </div>
+
+    <div class="masonry-item" data-cat="street" data-title="Gradska tišina" data-sub="Ulična" data-full="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1400&q=90">
+      <div class="img-wrap img-wide">
+        <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=700&q=80&fit=crop" alt="Ulična — Gradska tišina" class="loading" loading="lazy">
+      </div>
+      <div class="overlay"><div class="overlay-content"><span class="tag">Ulična</span><h3>Gradska tišina</h3></div></div>
+    </div>
+
+    <div class="masonry-item" data-cat="fashion" data-title="Svjetlost u njenim očima" data-sub="Moda" data-full="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1400&q=90">
+      <div class="img-wrap img-tall">
+        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=700&q=80&fit=crop" alt="Moda — Svjetlost u njenim očima" class="loading" loading="lazy">
+      </div>
+      <div class="overlay"><div class="overlay-content"><span class="tag">Moda</span><h3>Svjetlost u njenim očima</h3></div></div>
+    </div>
+
+    <div class="masonry-item" data-cat="portrait" data-title="Samoća" data-sub="Portret" data-full="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=1400&q=90">
+      <div class="img-wrap img-wide">
+        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=700&q=80&fit=crop" alt="Portret — Samoća" class="loading" loading="lazy">
+      </div>
+      <div class="overlay"><div class="overlay-content"><span class="tag">Portret</span><h3>Samoća</h3></div></div>
+    </div>
+
+    <div class="masonry-item" data-cat="wedding" data-title="Vječna zavjesa" data-sub="Vjenčanje" data-full="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=1400&q=90">
+      <div class="img-wrap img-sq">
+        <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=700&q=80&fit=crop" alt="Vjenčanje — Vječna zavjesa" class="loading" loading="lazy">
+      </div>
+      <div class="overlay"><div class="overlay-content"><span class="tag">Vjenčanje</span><h3>Vječna zavjesa</h3></div></div>
+    </div>
+
+    <div class="masonry-item" data-cat="cinematic" data-title="Između kadrova" data-sub="Cinematska" data-full="https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?w=1400&q=90">
+      <div class="img-wrap img-tall">
+        <img src="https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?w=700&q=80&fit=crop" alt="Cinematska — Između kadrova" class="loading" loading="lazy">
+      </div>
+      <div class="overlay"><div class="overlay-content"><span class="tag">Cinematska</span><h3>Između kadrova</h3></div></div>
+    </div>
+
+    <div class="masonry-item" data-cat="portrait" data-title="Poslijepodnevno sanjarenje" data-sub="Portret" data-full="https://images.unsplash.com/photo-1488716820095-cbe80883c496?w=1400&q=90">
+      <div class="img-wrap img-wide">
+        <img src="https://images.unsplash.com/photo-1488716820095-cbe80883c496?w=700&q=80&fit=crop" alt="Portret — Poslijepodnevno sanjarenje" class="loading" loading="lazy">
+      </div>
+      <div class="overlay"><div class="overlay-content"><span class="tag">Portret</span><h3>Poslijepodnevno sanjarenje</h3></div></div>
+    </div>
+
+    <div class="masonry-item" data-cat="street" data-title="Kiša u gradu" data-sub="Ulična" data-full="https://images.unsplash.com/photo-1461696114087-397271a7aedc?w=1400&q=90">
+      <div class="img-wrap img-tall">
+        <img src="https://images.unsplash.com/photo-1461696114087-397271a7aedc?w=700&q=80&fit=crop" alt="Ulična — Kiša u gradu" class="loading" loading="lazy">
+      </div>
+      <div class="overlay"><div class="overlay-content"><span class="tag">Ulična</span><h3>Kiša u gradu</h3></div></div>
+    </div>
+
+    <div class="masonry-item" data-cat="wedding" data-title="Nježni trenutak" data-sub="Vjenčanje" data-full="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=1400&q=90">
+      <div class="img-wrap img-sq">
+        <img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=700&q=80&fit=crop" alt="Vjenčanje — Nježni trenutak" class="loading" loading="lazy">
+      </div>
+      <div class="overlay"><div class="overlay-content"><span class="tag">Vjenčanje</span><h3>Nježni trenutak</h3></div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" onclick="closeLightbox()">Zatvori ✕</button>
+    <button class="lightbox-nav lightbox-prev" onclick="lightboxNav(-1)">←</button>
+    <button class="lightbox-nav lightbox-next" onclick="lightboxNav(1)">→</button>
+    <img class="lightbox-img" id="lightboxImg" src="" alt="">
+    <div class="lightbox-meta">
+      <span class="tag" id="lightboxSub"></span>
+      <h3 id="lightboxTitle"></h3>
+    </div>
+  </div>
+</div>
+
+<div style="text-align:center;padding:20px 0 40px"><div class="divider"></div></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-photo-wrap fade-in">
+      <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&q=85&fit=crop&crop=faces" alt="Photo by Enna — fotografkinja" loading="lazy">
+      <div class="about-photo-frame"></div>
+      <span class="about-photo-label">© Photo by Enna, 2024</span>
+    </div>
+    <div class="about-text fade-in fade-in-delay-1">
+      <span class="section-eyebrow">Umjetnica</span>
+      <h2 class="section-title">Više od<br><em>fotografije</em></h2>
+      <p class="about-body">Vjerujem da svaka slika nosi cijeli svemir. <strong>Rođena u Pločama, aktivna diljem Europe</strong>, provela sam više od desetljeća u potrazi za svjetlošću — u tišini između zavjeta, u napetosti modnog seta, u spokoju grada u 4 ujutro.</p>
+      <p class="about-body">Moj rad živi na granici <strong>dokumentarne istine i cinematske ljepote</strong>. Ne namještam trenutke — čekam ih, prizivam ih, stvaram prostor da se dogode. Rezultat je fotografija koja se osjeća i svjedočenom i vječnom.</p>
+      <div class="about-stats">
+        <div><span class="stat-num">340+</span><span class="stat-label">Završenih sesija</span></div>
+        <div><span class="stat-num">12+</span><span class="stat-label">Godina iskustva</span></div>
+        <div><span class="stat-num">18</span><span class="stat-label">Zemalja rada</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header fade-in">
+    <span class="section-eyebrow">Što nudim</span>
+    <h2 class="section-title">Usluge i<br><em>paketi</em></h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card fade-in">
+      <span class="service-num">01</span>
+      <h3 class="service-name">Vjenčanja</h3>
+      <p class="service-desc">Cjelodnevno dokumentarno praćenje vaših najintimnijih trenutaka. Od tihih priprema do zadnjeg plesa.</p>
+      <div class="service-price"><span class="price-from">Od</span><span class="price-val">€2.800</span><span class="price-unit">/ dan</span></div>
+      <ul class="service-includes"><li>12 sati potpunog snimanja</li><li>400+ obrađenih fotografija</li><li>Privatna online galerija</li><li>Fajlovi za print</li></ul>
+    </div>
+    <div class="service-card fade-in fade-in-delay-1">
+      <span class="service-num">02</span>
+      <h3 class="service-name">Portretne sesije</h3>
+      <p class="service-desc">Intimne individualne sesije koje otkrivaju karakter, raspoloženje i suptilnu ljepotu osobe.</p>
+      <div class="service-price"><span class="price-from">Od</span><span class="price-val">€480</span><span class="price-unit">/ sesija</span></div>
+      <ul class="service-includes"><li>2-satna sesija</li><li>40 obrađenih fotografija</li><li>Odabir lokacije</li><li>Savjeti za styling</li></ul>
+    </div>
+    <div class="service-card fade-in fade-in-delay-2">
+      <span class="service-num">03</span>
+      <h3 class="service-name">Modni editorijal</h3>
+      <p class="service-desc">Visoko-konceptualna editorijalna fotografija za brendove, magazine i kreativne kampanje.</p>
+      <div class="service-price"><span class="price-from">Od</span><span class="price-val">€1.400</span><span class="price-unit">/ dan</span></div>
+      <ul class="service-includes"><li>Puni produkcijski dan</li><li>80+ obrađenih fotografija</li><li>Kreativna direkcija</li><li>Komercijalna licenca</li></ul>
+    </div>
+    <div class="service-card fade-in">
+      <span class="service-num">04</span>
+      <h3 class="service-name">Brend sadržaj</h3>
+      <p class="service-desc">Kohezivno vizualno pripovijedanje za brendove koji traže uzdignuti, editorijalni estetski izgled.</p>
+      <div class="service-price"><span class="price-from">Od</span><span class="price-val">€900</span><span class="price-unit">/ pola dana</span></div>
+      <ul class="service-includes"><li>Usklađivanje s brendom</li><li>60+ fotografija</li><li>Formati za društvene mreže</li><li>Prava korištenja uključena</li></ul>
+    </div>
+    <div class="service-card fade-in fade-in-delay-1">
+      <span class="service-num">05</span>
+      <h3 class="service-name">Komercijalna fotografija</h3>
+      <p class="service-desc">Fotografija proizvoda i kampanja — od luksuznih dobara do arhitektonskih prostora.</p>
+      <div class="service-price"><span class="price-from">Od</span><span class="price-val">€1.200</span><span class="price-unit">/ dan</span></div>
+      <ul class="service-includes"><li>Studio ili teren</li><li>100+ finalnih fotografija</li><li>Retuširanje uključeno</li><li>Puna komercijalna prava</li></ul>
+    </div>
+    <div class="service-card fade-in fade-in-delay-2">
+      <span class="service-num">06</span>
+      <h3 class="service-name">Videografija</h3>
+      <p class="service-desc">Cinematski kratki filmovi i brend reelovi — pokretne slike s istom emocionalnom dubinom kao i fotografija.</p>
+      <div class="service-price"><span class="price-from">Od</span><span class="price-val">€1.800</span><span class="price-unit">/ dan</span></div>
+      <ul class="service-includes"><li>4K cinematsko snimanje</li><li>Color graded montaža</li><li>Licencirana glazba</li><li>Finalni film 2-3 min</li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="testimonials-inner">
+    <div class="fade-in">
+      <span class="section-eyebrow">Lijepe riječi</span>
+      <h2 class="section-title"><em>Što kažu</em> klijenti</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial fade-in">
+        <span class="testimonial-quote">&ldquo;</span>
+        <p>Enna ima izvanrednu sposobnost da bude nevidljiva u prostoru, a istovremeno uhvati sve što je važno. Naše vjenčane fotografije su nešto što nismo vidjeli nigdje — sirove, cinematske, potpuno naše.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">MK</div>
+          <div><span class="author-name">Mira i Kristijan</span><span class="author-role">Vjenčanje, Dubrovnik 2023.</span></div>
+        </div>
+      </div>
+      <div class="testimonial fade-in fade-in-delay-1">
+        <span class="testimonial-quote">&ldquo;</span>
+        <p>Suradnja s Ennom na našem proljetnom editorijalu bila je jedna od najfinijih kreativnih iskustava. Donijela je viziju koja je cijelu kampanju podigla iznad svega što smo zamislili.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">SL</div>
+          <div><span class="author-name">Sophie Laurent</span><span class="author-role">Kreativna direktorica, Maison Léon</span></div>
+        </div>
+      </div>
+      <div class="testimonial fade-in fade-in-delay-2">
+        <span class="testimonial-quote">&ldquo;</span>
+        <p>Portretna sesija promijenila je kako vidim samu sebe. Enna stvara prostor toliko sigurnog povjerenja — ono što je nastalo iz te sesije čuvat ću zauvijek. Umjetnica u pravom smislu riječi.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">AN</div>
+          <div><span class="author-name">Ana Novak</span><span class="author-role">Klijentica portretne sesije, Ljubljana</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-info fade-in">
+      <span class="section-eyebrow">Kontaktiraj me</span>
+      <h2 class="section-title">Stvorimo zajedno<br><em>nešto</em><br>vječno</h2>
+      <p>Planirate li vjenčanje, kampanju, ili jednostavno želite portret koji zaista odražava tko ste — drago mi je čuti od vas.</p>
+      <div class="contact-details">
+        <div class="contact-detail">
+          <div class="contact-detail-icon"><svg viewBox="0 0 16 16"><rect x="1" y="3" width="14" height="10" rx="1"/><path d="M1 4l7 5 7-5"/></svg></div>
+          <div class="contact-detail-text"><span class="contact-detail-label">Email</span><span class="contact-detail-val">hello@photobyenna.com</span></div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon"><svg viewBox="0 0 16 16"><circle cx="8" cy="7" r="3"/><path d="M8 1C5.2 1 3 3.2 3 6c0 4 5 9 5 9s5-5 5-9c0-2.8-2.2-5-5-5z"/></svg></div>
+          <div class="contact-detail-text"><span class="contact-detail-label">Lokacija</span><span class="contact-detail-val">Ploče · Ljubuski · Dostupna diljem Europe</span></div>
+        </div>
+      </div>
+      <div class="social-links">
+        <a href="#" class="social-link" title="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+        <a href="#" class="social-link" title="Behance"><svg viewBox="0 0 24 24"><path d="M6.938 4.503c.702 0 1.34.06 1.92.188.577.13 1.07.33 1.485.61.41.28.733.65.96 1.12.225.47.34 1.05.34 1.73 0 .74-.17 1.36-.507 1.86-.336.5-.837.9-1.502 1.22.906.26 1.576.72 2.022 1.37.448.66.665 1.45.665 2.36 0 .75-.13 1.39-.41 1.93-.28.55-.67 1-.16 1.35-.49.35-1.05.6-1.68.75-.63.16-1.29.23-1.97.23H0V4.51h6.938v-.007zm-.412 5.478c.585 0 1.064-.13 1.437-.41.372-.28.557-.72.557-1.29 0-.31-.06-.572-.175-.785-.118-.213-.278-.378-.48-.506-.202-.127-.44-.218-.713-.274-.273-.056-.565-.085-.876-.085H2.887v3.35h3.64zm.22 5.568c.34 0 .66-.036.955-.107.296-.07.553-.183.774-.34.22-.16.394-.37.516-.63.12-.27.183-.61.183-1.01 0-.82-.228-1.4-.68-1.75-.453-.34-1.06-.52-1.823-.52H2.888v4.36h3.858v-.003zm9.966.33c.37.36.92.54 1.64.54.51 0 .96-.13 1.31-.38.36-.26.59-.54.7-.85h2.25c-.36 1.11-.91 1.92-1.65 2.4-.74.49-1.64.73-2.7.73-.73 0-1.38-.12-1.97-.35-.58-.24-1.07-.58-1.47-1.01-.4-.44-.7-.96-.91-1.57-.21-.6-.32-1.27-.32-1.99 0-.7.11-1.34.33-1.93.22-.59.53-1.1.93-1.54.4-.43.89-.77 1.47-1.01.58-.24 1.24-.36 1.97-.36.81 0 1.51.15 2.09.45.58.3 1.06.7 1.43 1.21.37.5.63 1.08.79 1.73.16.64.21 1.31.16 2.02H15.97c0 .74.22 1.44.74 1.92zm2.95-5.17c-.3-.33-.78-.5-1.44-.5-.42 0-.76.07-1.02.2-.27.13-.48.3-.64.5-.17.2-.28.42-.34.66-.06.24-.1.47-.1.69h3.89c-.08-.7-.04-1.25-.34-1.55zm-3.72-4.85h4.93v1.26h-4.93V5.86z"/></svg></a>
+        <a href="#" class="social-link" title="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+      </div>
+    </div>
+    <div class="fade-in fade-in-delay-1">
+      <div class="form-row">
+        <div class="form-group"><label>Ime</label><input type="text" placeholder="Vaše ime"></div>
+        <div class="form-group"><label>Prezime</label><input type="text" placeholder="Vaše prezime"></div>
+      </div>
+      <div class="form-group"><label>Email adresa</label><input type="email" placeholder="vas@email.com"></div>
+      <div class="form-group"><label>Usluga koja vas zanima</label>
+        <select>
+          <option value="" disabled selected>Odaberite uslugu...</option>
+          <option>Fotografija vjenčanja</option>
+          <option>Portretna sesija</option>
+          <option>Modni editorijal</option>
+          <option>Brend sadržaj</option>
+          <option>Komercijalna fotografija</option>
+          <option>Videografija</option>
+          <option>Ostalo / Upit</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Željeni datum</label><input type="text" placeholder="npr. Lipanj 2025. · Fleksibilno"></div>
+      <div class="form-group"><label>Vaša poruka</label><textarea placeholder="Ispričajte mi o svojoj viziji, svojoj priči, ili jednostavno pozdravite..."></textarea></div>
+      <div class="form-submit">
+        <span class="submit-note">Odgovaram unutar 24 sata.</span>
+        <button class="btn-submit" type="button" onclick="handleSubmit(this)">Rezerviraj termin →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-logo">photo by Enna</span>
+  <span class="footer-copy">© 2024 Photo by Enna. Sva prava pridržana.</span>
+  <div class="footer-links"><a href="#">Privatnost</a><a href="#">Uvjeti</a><a href="#portfolio">Portfolio</a><a href="#contact">Kontakt</a></div>
+</footer>
+
+<script>
+const cursor = document.getElementById('cursor'), ring = document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+setInterval(()=>{rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';},16);
+document.querySelectorAll('a,button,.masonry-item,.service-card,.filter-btn').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.classList.add('hover');ring.classList.add('hover');});
+  el.addEventListener('mouseleave',()=>{cursor.classList.remove('hover');ring.classList.remove('hover');});
+});
+
+window.addEventListener('scroll',()=>{ document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60); });
+
+const obs = new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:.1});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+
+document.querySelectorAll('.masonry-item img').forEach(img=>{
+  img.addEventListener('load',()=>img.classList.replace('loading','loaded'));
+  if(img.complete) img.classList.replace('loading','loaded');
+});
+
+function openMobileMenu(){
+  document.getElementById('mobileMenu').classList.add('open');
+  document.getElementById('hamburger').style.display='none';
+}
+function closeMobileMenu(){
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('hamburger').style.display='flex';
+}
+
+const items = document.querySelectorAll('.masonry-item');
+const gallery = document.getElementById('gallery');
+
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelector('.filter-btn.active').classList.remove('active');
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    [...items].forEach(item=>{
+      item.style.transition = 'opacity .25s ease, transform .25s ease';
+      item.style.opacity = '0';
+      item.style.transform = 'translateY(8px)';
+    });
+    setTimeout(()=>{
+      const matched = [...items].filter(i => f==='all' || i.dataset.cat===f);
+      const rest    = [...items].filter(i => f!=='all' && i.dataset.cat!==f);
+      matched.forEach(i => gallery.appendChild(i));
+      rest.forEach(i => gallery.appendChild(i));
+      matched.forEach((item, idx)=>{
+        item.style.transition = `opacity .4s ease ${idx*0.05}s, transform .4s ease ${idx*0.05}s`;
+        item.style.opacity = '1';
+        item.style.transform = 'translateY(0)';
+        item.style.pointerEvents = 'auto';
+      });
+      rest.forEach(item=>{
+        item.style.transition = 'opacity .4s ease, transform .4s ease';
+        item.style.opacity = '0.1';
+        item.style.transform = 'translateY(0)';
+        item.style.pointerEvents = 'none';
+      });
+    }, 280);
+  });
+});
+
+let currentIdx=0;
+items.forEach(item=>item.addEventListener('click',()=>{
+  const live=[...document.querySelectorAll('.masonry-item')];
+  openLightbox(live.indexOf(item));
+}));
+function openLightbox(i){
+  currentIdx=i;
+  const item=document.querySelectorAll('.masonry-item')[i];
+  document.getElementById('lightboxImg').src=item.dataset.full||item.querySelector('img').src;
+  document.getElementById('lightboxImg').alt=item.querySelector('img').alt;
+  document.getElementById('lightboxTitle').textContent=item.dataset.title;
+  document.getElementById('lightboxSub').textContent=item.dataset.sub;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
+function lightboxNav(dir){const live=document.querySelectorAll('.masonry-item');let n=currentIdx+dir;if(n<0)n=live.length-1;if(n>=live.length)n=0;openLightbox(n);}
+document.getElementById('lightbox').addEventListener('click',e=>{if(e.target===document.getElementById('lightbox'))closeLightbox();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();if(e.key==='ArrowRight')lightboxNav(1);if(e.key==='ArrowLeft')lightboxNav(-1);});
+
+window.addEventListener('scroll',()=>{
+  const el=document.getElementById('heroBg');
+  if(el) el.style.transform=`translateY(${window.scrollY*.3}px)`;
+});
+
+function handleSubmit(btn){
+  const orig=btn.textContent;
+  btn.textContent='Poruka poslana ✓';
+  btn.style.background='rgba(200,169,110,.15)';
+  btn.disabled=true;
+  setTimeout(()=>{btn.textContent=orig;btn.style.background='';btn.disabled=false;},3500);
+}
+</script>
+</body>
+</html>

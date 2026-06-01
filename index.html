@@ -10,7 +10,7 @@
 <title>Photo by Enna</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&family=Tenor+Sans&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
@@ -19,100 +19,181 @@
     --accent: #c8a96e; --accent-light: #e8d5a8; --accent-dark: #8a6e3a;
     --border: rgba(200,169,110,0.15); --border-subtle: rgba(255,255,255,0.06);
     --white: #f7f3ec;
+    --font-display: 'Bodoni Moda', serif;
+    --font-nav: 'Tenor Sans', sans-serif;
+    --font-body: 'Cormorant Garamond', serif;
+    --font-ui: 'Inter', sans-serif;
   }
   html { scroll-behavior: smooth; }
-  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-weight: 300; overflow-x: hidden; cursor: none; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font-ui); font-weight: 300; overflow-x: hidden; cursor: none; }
   body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E"); opacity: 0.025; pointer-events: none; z-index: 9999; }
   .cursor { position: fixed; width: 10px; height: 10px; background: var(--accent); border-radius: 50%; pointer-events: none; z-index: 10000; transform: translate(-50%,-50%); transition: transform .1s ease, width .3s ease, height .3s ease; }
   .cursor-ring { position: fixed; width: 40px; height: 40px; border: 1px solid rgba(200,169,110,.5); border-radius: 50%; pointer-events: none; z-index: 10000; transform: translate(-50%,-50%); transition: transform .15s ease, width .3s ease, height .3s ease, border-color .3s ease; }
   .cursor.hover { width: 6px; height: 6px; }
   .cursor-ring.hover { width: 60px; height: 60px; border-color: var(--accent); }
+  @media (hover: none) and (pointer: coarse) {
+    .cursor, .cursor-ring { display: none; }
+    body { cursor: auto; }
+  }
 
-  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 28px 60px; display: flex; align-items: center; justify-content: space-between; transition: padding .4s ease, background .4s ease, backdrop-filter .4s ease; }
-  nav.scrolled { padding: 18px 60px; background: rgba(13,13,13,.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-subtle); }
-  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 400; letter-spacing: .08em; color: var(--white); text-decoration: none; font-style: italic; }
-  .nav-links { display: flex; gap: 44px; list-style: none; }
-  .nav-links a { color: var(--text-muted); text-decoration: none; font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; transition: color .3s ease; font-weight: 400; }
+  /* ─── NAVIGATION ─── */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 28px 60px; display: flex; align-items: center; justify-content: space-between; transition: padding .4s ease, background .4s ease, backdrop-filter .4s ease, transform .35s ease; }
+  nav.scrolled { padding: 18px 60px; background: rgba(13,13,13,.82); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border-bottom: 1px solid var(--border-subtle); }
+
+  /* NEW: Bodoni Moda logo — high-fashion italic */
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.45rem;
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: .12em;
+    color: var(--white);
+    text-decoration: none;
+    transition: color .3s ease;
+    line-height: 1;
+  }
+  .nav-logo:hover { color: var(--accent-light); }
+  .nav-logo span { color: var(--accent); font-style: normal; }
+
+  /* NEW: Tenor Sans nav links — clean editorial */
+  .nav-links { display: flex; gap: 44px; list-style: none; align-items: center; }
+  .nav-links a {
+    font-family: var(--font-nav);
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: .78rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    transition: color .3s ease;
+  }
   .nav-links a:hover { color: var(--accent); }
-  .nav-cta { border: 1px solid var(--border); padding: 10px 24px; font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-light) !important; transition: background .3s ease, border-color .3s ease !important; }
+  .nav-cta {
+    border: 1px solid var(--border) !important;
+    padding: 10px 26px !important;
+    color: var(--accent-light) !important;
+    transition: background .3s ease, border-color .3s ease !important;
+    font-size: .72rem !important;
+  }
   .nav-cta:hover { background: rgba(200,169,110,.08) !important; border-color: var(--accent) !important; }
   .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
   .nav-hamburger span { display: block; width: 24px; height: 1px; background: var(--text); transition: all .3s ease; }
 
+  /* ─── HERO ─── */
   .hero { position: relative; height: 100vh; min-height: 700px; display: flex; align-items: flex-end; justify-content: flex-start; overflow: hidden; }
   .hero-bg-img { position: absolute; inset: 0; background-size: cover; background-position: center 30%; background-repeat: no-repeat; transition: transform .1s linear; }
   .hero-bg-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,6,4,.92) 0%, rgba(8,6,4,.5) 40%, rgba(8,6,4,.25) 100%); }
   .hero-content { position: relative; z-index: 2; padding: 0 60px 80px; max-width: 800px; }
-  .hero-eyebrow { font-size: .65rem; letter-spacing: .3em; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; opacity: 0; transform: translateY(20px); animation: fadeUp 1s ease .3s forwards; display: block; }
-  .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(3.5rem,8vw,7rem); font-weight: 400; line-height: .95; letter-spacing: -.02em; color: var(--white); margin-bottom: 32px; opacity: 0; transform: translateY(30px); animation: fadeUp 1.2s ease .5s forwards; }
+  .hero-eyebrow { font-family: var(--font-nav); font-size: .62rem; letter-spacing: .32em; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; opacity: 0; transform: translateY(20px); animation: fadeUp 1s ease .3s forwards; display: block; }
+  .hero-title { font-family: var(--font-display); font-size: clamp(3.5rem,8vw,7rem); font-weight: 400; line-height: .95; letter-spacing: -.01em; color: var(--white); margin-bottom: 32px; opacity: 0; transform: translateY(30px); animation: fadeUp 1.2s ease .5s forwards; }
   .hero-title em { font-style: italic; color: var(--accent-light); }
-  .hero-subtitle { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 300; font-style: italic; color: var(--text-muted); letter-spacing: .04em; margin-bottom: 48px; opacity: 0; transform: translateY(20px); animation: fadeUp 1s ease .8s forwards; }
+  .hero-subtitle { font-family: var(--font-body); font-size: 1.3rem; font-weight: 300; font-style: italic; color: var(--text-muted); letter-spacing: .04em; margin-bottom: 48px; opacity: 0; transform: translateY(20px); animation: fadeUp 1s ease .8s forwards; }
   .hero-actions { display: flex; align-items: center; gap: 40px; opacity: 0; transform: translateY(20px); animation: fadeUp 1s ease 1s forwards; }
-  .btn-primary { display: inline-flex; align-items: center; gap: 12px; background: var(--accent); color: #0d0d0d; padding: 16px 36px; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; font-weight: 500; transition: background .3s ease, transform .3s ease; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 12px; background: var(--accent); color: #0d0d0d; padding: 16px 36px; font-family: var(--font-nav); font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; font-weight: 400; transition: background .3s ease, transform .3s ease; }
   .btn-primary:hover { background: var(--accent-light); transform: translateY(-2px); }
-  .btn-ghost { display: inline-flex; align-items: center; gap: 10px; color: var(--text-muted); font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; text-decoration: none; transition: color .3s ease; border-bottom: 1px solid transparent; padding-bottom: 2px; }
+  .btn-ghost { display: inline-flex; align-items: center; gap: 10px; color: var(--text-muted); font-family: var(--font-nav); font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; text-decoration: none; transition: color .3s ease; border-bottom: 1px solid transparent; padding-bottom: 2px; }
   .btn-ghost:hover { color: var(--accent-light); border-bottom-color: var(--accent); }
-  .hero-scroll-hint { position: absolute; bottom: 32px; right: 60px; display: flex; align-items: center; gap: 12px; color: var(--text-dim); font-size: .65rem; letter-spacing: .2em; text-transform: uppercase; z-index: 2; opacity: 0; animation: fadeUp 1s ease 1.4s forwards; }
+  .hero-scroll-hint { position: absolute; bottom: 32px; right: 60px; display: flex; align-items: center; gap: 12px; color: var(--text-dim); font-family: var(--font-nav); font-size: .62rem; letter-spacing: .22em; text-transform: uppercase; z-index: 2; opacity: 0; animation: fadeUp 1s ease 1.4s forwards; }
   .scroll-line { width: 40px; height: 1px; background: var(--text-dim); position: relative; overflow: hidden; }
   .scroll-line::after { content: ''; position: absolute; left: -100%; top: 0; width: 100%; height: 1px; background: var(--accent); animation: scrollLine 2s ease-in-out infinite 1.6s; }
   @keyframes scrollLine { 0%{left:-100%} 100%{left:100%} }
   @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
+  /* ─── SECTIONS ─── */
   section { padding: 120px 60px; }
-  .section-eyebrow { font-size: .63rem; letter-spacing: .3em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; display: block; }
-  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem,4vw,3.5rem); font-weight: 400; line-height: 1.1; color: var(--white); margin-bottom: 20px; }
+  .section-eyebrow { font-family: var(--font-nav); font-size: .62rem; letter-spacing: .3em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; display: block; }
+  .section-title { font-family: var(--font-display); font-size: clamp(2.2rem,4vw,3.5rem); font-weight: 400; line-height: 1.1; color: var(--white); margin-bottom: 20px; }
   .section-title em { font-style: italic; color: var(--accent-light); }
   .divider { width: 1px; height: 80px; background: linear-gradient(to bottom, transparent, var(--accent), transparent); margin: 0 auto; display: block; }
 
+  /* ─── PORTFOLIO ─── */
   #portfolio { padding: 80px 40px 120px; }
   .portfolio-header { text-align: center; padding: 0 20px 60px; }
   .portfolio-header p { color: var(--text-muted); font-size: .95rem; font-weight: 300; letter-spacing: .04em; max-width: 500px; margin: 0 auto 48px; }
-  .category-filters { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 60px; }
-  .filter-btn { padding: 8px 22px; border: 1px solid var(--border-subtle); background: none; color: var(--text-muted); font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; cursor: pointer; transition: all .3s ease; font-family: 'Inter', sans-serif; }
+
+  /* Featured 7-8 photos on homepage */
+  .featured-grid { max-width: 1400px; margin: 0 auto 80px; display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: auto; gap: 14px; }
+  .featured-item { position: relative; overflow: hidden; cursor: pointer; }
+  .featured-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+  .featured-item:nth-child(4) { grid-column: span 2; }
+  .featured-item:nth-child(7) { grid-column: span 2; }
+  .featured-item .img-wrap { width: 100%; height: 100%; min-height: 260px; position: relative; overflow: hidden; }
+  .featured-item:nth-child(1) .img-wrap { min-height: 520px; }
+  .featured-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s cubic-bezier(.25,.46,.45,.94); position: absolute; inset: 0; }
+  .featured-item:hover img { transform: scale(1.04); }
+  .featured-item .overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.88) 0%, rgba(0,0,0,.2) 50%, transparent 100%); opacity: 0; transition: opacity .4s ease; display: flex; align-items: flex-end; padding: 20px; }
+  .featured-item:hover .overlay { opacity: 1; }
+  .overlay-content .tag { font-family: var(--font-nav); font-size: .56rem; letter-spacing: .24em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 4px; }
+  .overlay-content h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 400; color: var(--white); font-style: italic; }
+
+  /* Albums section */
+  .albums-header { max-width: 1400px; margin: 0 auto 20px; }
+  .album-filters { max-width: 1400px; margin: 0 auto 40px; display: flex; gap: 8px; flex-wrap: wrap; }
+  @media (max-width: 768px) {
+    .album-filters { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 8px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .album-filters::-webkit-scrollbar { display: none; }
+    .filter-btn { flex-shrink: 0; }
+  }
+  .filter-btn { padding: 9px 22px; border: 1px solid var(--border-subtle); background: none; color: var(--text-muted); font-family: var(--font-nav); font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; cursor: pointer; transition: all .3s ease; }
   .filter-btn:hover, .filter-btn.active { background: rgba(200,169,110,.1); border-color: var(--accent); color: var(--accent-light); }
+  .albums-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .album-card { position: relative; overflow: hidden; cursor: pointer; aspect-ratio: 4/3; background: var(--bg3); }
+  .album-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .7s cubic-bezier(.25,.46,.45,.94), filter .5s ease; filter: brightness(.75) grayscale(.2); }
+  .album-card:hover img { transform: scale(1.06); filter: brightness(.6) grayscale(0); }
+  .album-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,.2) 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 32px; transition: background .4s ease; }
+  .album-card:hover .album-overlay { background: linear-gradient(135deg, rgba(0,0,0,.7) 0%, rgba(0,0,0,.4) 100%); }
+  .album-count { font-family: var(--font-nav); font-size: .6rem; letter-spacing: .28em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; display: block; }
+  .album-name { font-family: var(--font-display); font-size: 1.6rem; font-weight: 400; font-style: italic; color: var(--white); text-align: center; margin-bottom: 8px; line-height: 1.1; }
+  .album-sub { font-size: .75rem; color: rgba(255,255,255,.5); letter-spacing: .1em; text-align: center; margin-bottom: 24px; }
+  .album-btn { font-family: var(--font-nav); font-size: .62rem; letter-spacing: .22em; text-transform: uppercase; color: var(--accent-light); border: 1px solid rgba(200,169,110,.4); padding: 9px 22px; opacity: 0; transform: translateY(8px); transition: opacity .3s ease, transform .3s ease, background .3s ease, border-color .3s ease; }
+  .album-card:hover .album-btn { opacity: 1; transform: translateY(0); }
+  .album-btn:hover { background: rgba(200,169,110,.12); border-color: var(--accent); }
 
-  .masonry-grid { columns: 3; column-gap: 14px; max-width: 1400px; margin: 0 auto; }
-  .masonry-item { break-inside: avoid; margin-bottom: 14px; position: relative; overflow: hidden; cursor: pointer; }
-  .masonry-item img { width: 100%; display: block; transition: transform .6s cubic-bezier(.25,.46,.45,.94); object-fit: cover; }
-  .masonry-item:hover img { transform: scale(1.04); }
-  .masonry-item .overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.88) 0%, rgba(0,0,0,.2) 50%, transparent 100%); opacity: 0; transition: opacity .4s ease; display: flex; align-items: flex-end; padding: 24px; }
-  .masonry-item:hover .overlay { opacity: 1; }
-  .overlay-content .tag { font-size: .58rem; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 4px; }
-  .overlay-content h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 400; color: var(--white); font-style: italic; }
+  /* Album modal */
+  .album-modal { position: fixed; inset: 0; background: rgba(5,5,5,.97); z-index: 2000; display: flex; flex-direction: column; opacity: 0; pointer-events: none; transition: opacity .4s ease; overflow-y: auto; }
+  .album-modal.open { opacity: 1; pointer-events: all; }
+  .album-modal-header { position: sticky; top: 0; background: rgba(13,13,13,.95); backdrop-filter: blur(20px); padding: 24px 48px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-subtle); z-index: 10; }
+  .album-modal-title { font-family: var(--font-display); font-size: 1.5rem; font-style: italic; font-weight: 400; color: var(--white); }
+  .album-modal-close { font-family: var(--font-nav); font-size: .65rem; letter-spacing: .22em; text-transform: uppercase; color: var(--text-muted); background: none; border: 1px solid var(--border-subtle); padding: 10px 20px; cursor: pointer; transition: all .3s ease; }
+  .album-modal-close:hover { color: var(--accent); border-color: var(--accent); }
+  .album-modal-body { padding: 40px 48px; }
+  .album-masonry { columns: 3; column-gap: 14px; }
+  .album-masonry-item { break-inside: avoid; margin-bottom: 14px; position: relative; overflow: hidden; cursor: pointer; }
+  .album-masonry-item img { width: 100%; display: block; transition: transform .5s ease; }
+  .album-masonry-item:hover img { transform: scale(1.03); }
+  .album-masonry-item .overlay { position: absolute; inset: 0; background: rgba(0,0,0,.5); opacity: 0; transition: opacity .3s ease; display: flex; align-items: center; justify-content: center; }
+  .album-masonry-item:hover .overlay { opacity: 1; }
+  .album-masonry-item .overlay span { font-family: var(--font-nav); font-size: .6rem; letter-spacing: .22em; text-transform: uppercase; color: var(--white); border: 1px solid rgba(255,255,255,.4); padding: 8px 16px; }
 
-  .img-tall { aspect-ratio: 2/3; }
-  .img-wide { aspect-ratio: 3/2; }
-  .img-sq { aspect-ratio: 1/1; }
-  .masonry-item img { height: 100%; position: absolute; inset: 0; width: 100%; }
-  .masonry-item .img-wrap { position: relative; overflow: hidden; }
-
-  .lightbox { position: fixed; inset: 0; background: rgba(5,5,5,.97); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .4s ease; }
+  /* Lightbox */
+  .lightbox { position: fixed; inset: 0; background: rgba(5,5,5,.97); z-index: 3000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .4s ease; }
   .lightbox.open { opacity: 1; pointer-events: all; }
   .lightbox-inner { position: relative; width: 90vw; max-width: 1000px; max-height: 90vh; }
   .lightbox-img { width: 100%; max-height: 80vh; object-fit: contain; display: block; }
-  .lightbox-close { position: absolute; top: -48px; right: 0; background: none; border: none; color: var(--text-muted); font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; cursor: pointer; padding: 8px; transition: color .3s ease; font-family: 'Inter', sans-serif; }
+  .lightbox-close { position: absolute; top: -48px; right: 0; background: none; border: none; color: var(--text-muted); font-family: var(--font-nav); font-size: .65rem; letter-spacing: .2em; text-transform: uppercase; cursor: pointer; padding: 8px; transition: color .3s ease; }
   .lightbox-close:hover { color: var(--accent); }
   .lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); background: none; border: 1px solid var(--border); color: var(--text-muted); width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all .3s ease; font-size: 1.2rem; }
   .lightbox-nav:hover { background: rgba(200,169,110,.1); color: var(--accent); border-color: var(--accent); }
   .lightbox-prev { left: -70px; } .lightbox-next { right: -70px; }
   .lightbox-meta { margin-top: 20px; text-align: center; }
-  .lightbox-meta .tag { font-size: .6rem; letter-spacing: .25em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; display: block; }
-  .lightbox-meta h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-style: italic; font-weight: 400; color: var(--text); }
+  .lightbox-meta .tag { font-family: var(--font-nav); font-size: .58rem; letter-spacing: .25em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; display: block; }
+  .lightbox-meta h3 { font-family: var(--font-display); font-size: 1.1rem; font-style: italic; font-weight: 400; color: var(--text); }
 
+  /* ─── ABOUT ─── */
   #about { background: var(--bg2); position: relative; overflow: hidden; }
   #about::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, var(--accent), transparent); opacity: .3; }
   .about-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
   .about-photo-wrap { position: relative; }
   .about-photo-wrap img { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; filter: grayscale(20%) contrast(1.05); }
   .about-photo-frame { position: absolute; inset: -12px; border: 1px solid var(--border); pointer-events: none; transform: translate(12px,12px); }
-  .about-photo-label { position: absolute; bottom: -24px; right: 0; font-size: .6rem; letter-spacing: .22em; text-transform: uppercase; color: var(--text-dim); }
+  .about-photo-label { position: absolute; bottom: -24px; right: 0; font-family: var(--font-nav); font-size: .58rem; letter-spacing: .22em; text-transform: uppercase; color: var(--text-dim); }
   .about-text .section-title { margin-bottom: 32px; }
-  .about-body { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; line-height: 1.85; color: #8a8070; font-style: italic; margin-bottom: 32px; }
+  .about-body { font-family: var(--font-body); font-size: 1.2rem; line-height: 1.85; color: #8a8070; font-style: italic; margin-bottom: 32px; }
   .about-body strong { color: var(--text-muted); font-style: normal; font-weight: 400; }
   .about-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 32px; margin-top: 52px; padding-top: 40px; border-top: 1px solid var(--border-subtle); }
-  .stat-num { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 400; color: var(--accent); line-height: 1; display: block; margin-bottom: 6px; }
-  .stat-label { font-size: .65rem; letter-spacing: .2em; text-transform: uppercase; color: var(--text-dim); }
+  .stat-num { font-family: var(--font-display); font-size: 2.5rem; font-weight: 400; color: var(--accent); line-height: 1; display: block; margin-bottom: 6px; }
+  .stat-label { font-family: var(--font-nav); font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: var(--text-dim); }
 
+  /* ─── SERVICES ─── */
   #services { position: relative; }
   .services-header { max-width: 1200px; margin: 0 auto 80px; }
   .services-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
@@ -120,31 +201,33 @@
   .service-card:hover { background: var(--bg3); border-color: var(--border); }
   .service-card::before { content: ''; position: absolute; top: 0; left: 0; width: 0; height: 2px; background: var(--accent); transition: width .4s ease; }
   .service-card:hover::before { width: 100%; }
-  .service-num { font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--text-dim); font-style: italic; line-height: 1; margin-bottom: 32px; transition: color .4s ease; }
+  .service-num { font-family: var(--font-display); font-size: 3rem; color: var(--text-dim); font-style: italic; line-height: 1; margin-bottom: 32px; transition: color .4s ease; }
   .service-card:hover .service-num { color: var(--accent-dark); }
-  .service-name { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 400; color: var(--white); margin-bottom: 16px; }
+  .service-name { font-family: var(--font-display); font-size: 1.4rem; font-weight: 400; color: var(--white); margin-bottom: 16px; }
   .service-desc { font-size: .85rem; line-height: 1.75; color: var(--text-muted); font-weight: 300; margin-bottom: 28px; }
   .service-price { display: flex; align-items: baseline; gap: 6px; margin-bottom: 20px; }
-  .price-from { font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--text-dim); }
-  .price-val { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 400; color: var(--accent); }
+  .price-from { font-family: var(--font-nav); font-size: .58rem; letter-spacing: .2em; text-transform: uppercase; color: var(--text-dim); }
+  .price-val { font-family: var(--font-display); font-size: 1.8rem; font-weight: 400; color: var(--accent); }
   .price-unit { font-size: .75rem; color: var(--text-dim); }
   .service-includes { list-style: none; display: flex; flex-direction: column; gap: 8px; }
   .service-includes li { font-size: .78rem; color: var(--text-muted); display: flex; align-items: center; gap: 10px; font-weight: 300; }
   .service-includes li::before { content: ''; width: 16px; height: 1px; background: var(--accent); flex-shrink: 0; }
 
+  /* ─── TESTIMONIALS ─── */
   #testimonials { background: var(--bg2); position: relative; overflow: hidden; text-align: center; }
   #testimonials::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, var(--accent), transparent); opacity: .25; }
   .testimonials-inner { max-width: 1100px; margin: 0 auto; }
   .testimonials-inner .section-title { margin-bottom: 70px; }
   .testimonials-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
   .testimonial { padding: 48px 36px; background: var(--bg); position: relative; text-align: left; }
-  .testimonial-quote { font-family: 'Playfair Display', serif; font-size: 4rem; line-height: .5; color: var(--accent); opacity: .3; margin-bottom: 20px; display: block; font-style: italic; }
-  .testimonial p { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; line-height: 1.8; color: #706858; font-style: italic; margin-bottom: 28px; }
+  .testimonial-quote { font-family: var(--font-display); font-size: 4rem; line-height: .5; color: var(--accent); opacity: .3; margin-bottom: 20px; display: block; font-style: italic; }
+  .testimonial p { font-family: var(--font-body); font-size: 1.1rem; line-height: 1.8; color: #706858; font-style: italic; margin-bottom: 28px; }
   .testimonial-author { display: flex; align-items: center; gap: 14px; }
-  .author-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--bg3); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: .8rem; color: var(--accent); flex-shrink: 0; }
-  .author-name { font-size: .78rem; letter-spacing: .1em; color: var(--text-muted); display: block; margin-bottom: 2px; }
+  .author-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--bg3); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: .8rem; color: var(--accent); flex-shrink: 0; }
+  .author-name { font-family: var(--font-nav); font-size: .76rem; letter-spacing: .1em; color: var(--text-muted); display: block; margin-bottom: 2px; }
   .author-role { font-size: .65rem; letter-spacing: .15em; text-transform: uppercase; color: var(--text-dim); }
 
+  /* ─── CONTACT ─── */
   #contact { position: relative; overflow: hidden; }
   #contact::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 40%; background: radial-gradient(ellipse 60% 100% at 50% 100%, rgba(200,169,110,.04) 0%, transparent 70%); pointer-events: none; }
   .contact-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.4fr; gap: 100px; align-items: start; }
@@ -154,7 +237,7 @@
   .contact-detail { display: flex; align-items: flex-start; gap: 16px; }
   .contact-detail-icon { width: 36px; height: 36px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
   .contact-detail-icon svg { width: 14px; height: 14px; stroke: var(--accent); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-  .contact-detail-label { font-size: .6rem; letter-spacing: .22em; text-transform: uppercase; color: var(--text-dim); display: block; margin-bottom: 3px; }
+  .contact-detail-label { font-family: var(--font-nav); font-size: .58rem; letter-spacing: .22em; text-transform: uppercase; color: var(--text-dim); display: block; margin-bottom: 3px; }
   .contact-detail-val { font-size: .88rem; color: var(--text-muted); font-weight: 300; }
   .social-links { display: flex; gap: 12px; margin-top: 52px; padding-top: 40px; border-top: 1px solid var(--border-subtle); }
   .social-link { width: 44px; height: 44px; border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--text-muted); transition: all .3s ease; }
@@ -162,22 +245,51 @@
   .social-link svg { width: 16px; height: 16px; fill: currentColor; }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .form-group { position: relative; margin-bottom: 16px; }
-  .form-group label { display: block; font-size: .62rem; letter-spacing: .22em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 10px; }
-  .form-group input, .form-group select, .form-group textarea { width: 100%; background: var(--bg2); border: 1px solid var(--border-subtle); border-bottom: 1px solid rgba(200,169,110,.2); color: var(--text); font-family: 'Inter', sans-serif; font-size: .88rem; font-weight: 300; padding: 14px 16px; outline: none; transition: border-color .3s ease, background .3s ease; -webkit-appearance: none; border-radius: 0; }
+  .form-group label { display: block; font-family: var(--font-nav); font-size: .6rem; letter-spacing: .22em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 10px; }
+  .form-group input, .form-group select, .form-group textarea { width: 100%; background: var(--bg2); border: 1px solid var(--border-subtle); border-bottom: 1px solid rgba(200,169,110,.2); color: var(--text); font-family: var(--font-ui); font-size: .88rem; font-weight: 300; padding: 14px 16px; outline: none; transition: border-color .3s ease, background .3s ease; -webkit-appearance: none; border-radius: 0; }
   .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--accent); background: rgba(200,169,110,.03); }
   .form-group textarea { resize: vertical; min-height: 140px; }
   .form-group select option { background: var(--bg2); }
   .form-group input::placeholder, .form-group textarea::placeholder { color: var(--text-dim); font-size: .82rem; }
   .form-submit { margin-top: 12px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
   .submit-note { font-size: .7rem; color: var(--text-dim); letter-spacing: .05em; }
-  .btn-submit { padding: 16px 44px; background: none; border: 1px solid var(--accent); color: var(--accent-light); font-family: 'Inter', sans-serif; font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; cursor: pointer; transition: all .3s ease; }
-  .btn-submit:hover { background: var(--accent); color: #0d0d0d; font-weight: 500; }
+  .btn-submit { padding: 16px 44px; background: none; border: 1px solid var(--accent); color: var(--accent-light); font-family: var(--font-nav); font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; cursor: pointer; transition: all .3s ease; }
+  .btn-submit:hover { background: var(--accent); color: #0d0d0d; }
 
+  /* ─── FLOATING CONTACT BUTTON ─── */
+  .float-contact { position: fixed; bottom: 36px; right: 36px; z-index: 999; display: flex; flex-direction: column; align-items: flex-end; gap: 12px; opacity: 0; pointer-events: none; transform: translateY(16px); transition: opacity .5s ease, transform .5s ease; }
+  .float-contact.visible { opacity: 1; pointer-events: all; transform: translateY(0); }
+  .float-btn { width: 58px; height: 58px; border-radius: 50%; background: var(--accent); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 24px rgba(200,169,110,.3), 0 0 0 0 rgba(200,169,110,.3); transition: transform .3s ease, box-shadow .3s ease, background .3s ease; position: relative; }
+  .float-btn:hover { transform: scale(1.08); background: var(--accent-light); box-shadow: 0 6px 32px rgba(200,169,110,.45); }
+  .float-btn svg { width: 22px; height: 22px; fill: #0d0d0d; transition: opacity .3s ease, transform .3s ease; position: absolute; }
+  .float-btn svg.icon-close { opacity: 0; transform: rotate(-90deg); }
+  .float-btn.active svg.icon-phone { opacity: 0; transform: rotate(90deg); }
+  .float-btn.active svg.icon-close { opacity: 1; transform: rotate(0deg); }
+  .float-btn::before { content: ''; position: absolute; inset: 0; border-radius: 50%; background: rgba(200,169,110,.3); animation: pulse 2.5s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{transform:scale(1);opacity:.6} 50%{transform:scale(1.5);opacity:0} }
+
+  .float-options { display: flex; flex-direction: column; gap: 10px; align-items: flex-end; opacity: 0; transform: translateY(12px) scale(.96); pointer-events: none; transition: opacity .3s ease, transform .3s ease; }
+  .float-options.open { opacity: 1; transform: translateY(0) scale(1); pointer-events: all; }
+
+  .float-option { display: flex; align-items: center; gap: 12px; cursor: pointer; text-decoration: none; }
+  .float-option-label { font-family: var(--font-nav); font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; color: var(--text); background: var(--bg2); border: 1px solid var(--border); padding: 8px 16px; white-space: nowrap; transition: all .3s ease; }
+  .float-option:hover .float-option-label { background: rgba(200,169,110,.1); border-color: var(--accent); color: var(--accent-light); }
+  .float-option-icon { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: transform .3s ease; }
+  .float-option:hover .float-option-icon { transform: scale(1.1); }
+  .float-option.call .float-option-icon { background: #2d5a3d; border: 1px solid rgba(45,90,61,.5); }
+  .float-option.whatsapp .float-option-icon { background: #075e54; border: 1px solid rgba(7,94,84,.5); }
+  .float-option-icon svg { width: 18px; height: 18px; fill: #fff; }
+
+  /* Contact section pulse trigger */
+  .float-contact.contact-visible .float-btn::before { animation: pulseStrong 1.5s ease-in-out infinite; }
+  @keyframes pulseStrong { 0%,100%{transform:scale(1);opacity:.8} 50%{transform:scale(1.7);opacity:0} }
+
+  /* ─── FOOTER ─── */
   footer { padding: 52px 60px 40px; border-top: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between; }
-  .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-style: italic; color: var(--text-muted); font-weight: 400; letter-spacing: .06em; }
+  .footer-logo { font-family: var(--font-display); font-size: 1.2rem; font-style: italic; color: var(--text-muted); font-weight: 400; letter-spacing: .06em; }
   .footer-copy { font-size: .68rem; letter-spacing: .1em; color: var(--text-dim); text-align: center; }
   .footer-links { display: flex; gap: 28px; }
-  .footer-links a { font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; color: var(--text-dim); text-decoration: none; transition: color .3s ease; }
+  .footer-links a { font-family: var(--font-nav); font-size: .63rem; letter-spacing: .18em; text-transform: uppercase; color: var(--text-dim); text-decoration: none; transition: color .3s ease; }
   .footer-links a:hover { color: var(--accent); }
 
   .fade-in { opacity: 0; transform: translateY(30px); transition: opacity .8s ease, transform .8s ease; }
@@ -187,21 +299,22 @@
 
   .mobile-menu { display: none; position: fixed; inset: 0; background: var(--bg); z-index: 1001; flex-direction: column; align-items: center; justify-content: center; gap: 36px; opacity: 0; transition: opacity .3s ease; }
   .mobile-menu.open { display: flex; opacity: 1; }
-  .mobile-menu a { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 400; color: var(--text-muted); text-decoration: none; font-style: italic; transition: color .3s ease; }
+  .mobile-menu a { font-family: var(--font-display); font-size: 2rem; font-weight: 400; color: var(--text-muted); text-decoration: none; font-style: italic; transition: color .3s ease; }
   .mobile-menu a:hover { color: var(--accent-light); }
-  .mobile-close { position: fixed; top: 22px; right: 28px; background: none; border: none; color: var(--text-muted); font-size: 1.6rem; cursor: pointer; font-family: 'Inter', sans-serif; z-index: 1002; line-height: 1; padding: 4px; }
+  .mobile-close { position: fixed; top: 22px; right: 28px; background: none; border: none; color: var(--text-muted); font-size: 1.6rem; cursor: pointer; z-index: 1002; line-height: 1; padding: 4px; }
 
-  .img-wrap { background: var(--bg3); }
-  .masonry-item img { transition: opacity .5s ease, transform .6s cubic-bezier(.25,.46,.45,.94); }
-  .masonry-item img.loading { opacity: 0; }
-  .masonry-item img.loaded { opacity: 1; }
-
+  /* ─── RESPONSIVE ─── */
   @media (max-width:1100px) {
-    .masonry-grid { columns: 2; }
+    .featured-grid { grid-template-columns: repeat(2,1fr); }
+    .featured-item:nth-child(1) { grid-column: span 2; }
+    .featured-item:nth-child(4),
+    .featured-item:nth-child(7) { grid-column: span 1; }
     .services-grid { grid-template-columns: 1fr 1fr; }
     .testimonials-grid { grid-template-columns: 1fr 1fr; }
     .about-inner { grid-template-columns: 1fr; gap: 60px; max-width: 680px; }
     .about-photo-wrap { max-width: 400px; }
+    .albums-grid { grid-template-columns: repeat(2,1fr); }
+    .album-masonry { columns: 2; }
   }
   @media (max-width:768px) {
     nav { padding: 22px 28px; } nav.scrolled { padding: 14px 28px; }
@@ -211,7 +324,8 @@
     #portfolio { padding: 60px 20px 80px; }
     .hero-content { padding: 0 28px 60px; }
     .hero-scroll-hint { right: 28px; }
-    .masonry-grid { columns: 1; }
+    .featured-grid { grid-template-columns: 1fr; }
+    .featured-item:nth-child(1), .featured-item:nth-child(4), .featured-item:nth-child(7) { grid-column: span 1; }
     .services-grid { grid-template-columns: 1fr; }
     .testimonials-grid { grid-template-columns: 1fr; }
     .contact-inner { grid-template-columns: 1fr; gap: 60px; }
@@ -219,7 +333,13 @@
     footer { flex-direction: column; gap: 20px; text-align: center; }
     .footer-links { flex-wrap: wrap; justify-content: center; }
     .lightbox-prev { left: 8px; } .lightbox-next { right: 8px; }
+    .albums-grid { grid-template-columns: 1fr; }
+    .album-masonry { columns: 1; }
+    .album-modal-body { padding: 24px 20px; }
+    .album-modal-header { padding: 18px 20px; }
     .about-stats { grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .float-contact { bottom: 24px; right: 20px; }
+    .float-btn { width: 52px; height: 52px; }
   }
 </style>
 </head>
@@ -227,6 +347,30 @@
 
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
+
+<!-- FLOATING CONTACT -->
+<div class="float-contact" id="floatContact">
+  <div class="float-options" id="floatOptions">
+    <a href="tel:+38700000000" class="float-option call">
+      <span class="float-option-label">Pozovi me</span>
+      <span class="float-option-icon">
+        <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+      </span>
+    </a>
+    <a href="https://wa.me/38700000000" target="_blank" class="float-option whatsapp">
+      <span class="float-option-label">WhatsApp poruka</span>
+      <span class="float-option-icon">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </span>
+    </a>
+  </div>
+  <button class="float-btn" id="floatMainBtn" onclick="toggleFloat()">
+    <!-- Phone icon -->
+    <svg class="icon-phone" viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+    <!-- Close icon -->
+    <svg class="icon-close" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke="#0d0d0d" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+  </button>
+</div>
 
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-close" onclick="closeMobileMenu()">✕</button>
@@ -238,7 +382,7 @@
 </div>
 
 <nav id="navbar">
-  <a href="#hero" class="nav-logo">photo by Enna</a>
+  <a href="#hero" class="nav-logo">photo by <span>Enna</span></a>
   <ul class="nav-links">
     <li><a href="#hero">Početna</a></li>
     <li><a href="#portfolio">Portfolio</a></li>
@@ -282,102 +426,131 @@
     <h2 class="section-title">Moj <em>Portfolio</em></h2>
     <p>Kurirani izbor trenutaka — gdje se svjetlost susreće s pričom, a emocija nadilazi vrijeme.</p>
   </div>
-  <div class="category-filters fade-in fade-in-delay-1">
-    <button class="filter-btn active" data-filter="all">Svi radovi</button>
-    <button class="filter-btn" data-filter="portrait">Portreti</button>
-    <button class="filter-btn" data-filter="fashion">Moda</button>
-    <button class="filter-btn" data-filter="wedding">Vjenčanja</button>
-    <button class="filter-btn" data-filter="street">Ulična</button>
-    <button class="filter-btn" data-filter="cinematic">Cinematska</button>
-  </div>
-  <div class="masonry-grid" id="gallery">
 
-    <div class="masonry-item" data-cat="portrait" data-title="Zlatni sat" data-sub="Portret" data-full="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=1400&q=90">
-      <div class="img-wrap img-tall">
-        <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=700&q=80&fit=crop" alt="Portret — Zlatni sat" class="loading" loading="lazy">
-      </div>
+  <!-- 8 FEATURED PHOTOS -->
+  <div class="featured-grid fade-in fade-in-delay-1">
+    <div class="featured-item" data-title="Zlatni sat" data-sub="Portret" data-full="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=1400&q=90">
+      <div class="img-wrap"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&q=80&fit=crop" alt="Zlatni sat" loading="lazy"></div>
       <div class="overlay"><div class="overlay-content"><span class="tag">Portret</span><h3>Zlatni sat</h3></div></div>
     </div>
-
-    <div class="masonry-item" data-cat="fashion" data-title="Noir editorijal" data-sub="Moda" data-full="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1400&q=90">
-      <div class="img-wrap img-wide">
-        <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=700&q=80&fit=crop" alt="Noir editorijal" class="loading" loading="lazy">
-      </div>
+    <div class="featured-item" data-title="Noir editorijal" data-sub="Moda" data-full="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1400&q=90">
+      <div class="img-wrap"><img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&q=80&fit=crop" alt="Noir editorijal" loading="lazy"></div>
       <div class="overlay"><div class="overlay-content"><span class="tag">Moda</span><h3>Noir editorijal</h3></div></div>
     </div>
-
-    <div class="masonry-item" data-cat="wedding" data-title="Prvo jutro" data-sub="Vjenčanje" data-full="https://images.unsplash.com/photo-1519741497674-611481863552?w=1400&q=90">
-      <div class="img-wrap img-tall">
-        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=700&q=80&fit=crop" alt="Vjenčanje — Prvo jutro" class="loading" loading="lazy">
-      </div>
+    <div class="featured-item" data-title="Prvo jutro" data-sub="Vjenčanje" data-full="https://images.unsplash.com/photo-1519741497674-611481863552?w=1400&q=90">
+      <div class="img-wrap"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80&fit=crop" alt="Prvo jutro" loading="lazy"></div>
       <div class="overlay"><div class="overlay-content"><span class="tag">Vjenčanje</span><h3>Prvo jutro</h3></div></div>
     </div>
-
-    <div class="masonry-item" data-cat="cinematic" data-title="Sumrak" data-sub="Cinematska" data-full="https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?w=1400&q=90">
-      <div class="img-wrap img-sq">
-        <img src="https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?w=700&q=80&fit=crop" alt="Cinematska — Sumrak" class="loading" loading="lazy">
-      </div>
+    <div class="featured-item" data-title="Sumrak" data-sub="Cinematska" data-full="https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?w=1400&q=90">
+      <div class="img-wrap"><img src="https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?w=800&q=80&fit=crop" alt="Sumrak" loading="lazy"></div>
       <div class="overlay"><div class="overlay-content"><span class="tag">Cinematska</span><h3>Sumrak</h3></div></div>
     </div>
-
-    <div class="masonry-item" data-cat="street" data-title="Gradska tišina" data-sub="Ulična" data-full="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1400&q=90">
-      <div class="img-wrap img-wide">
-        <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=700&q=80&fit=crop" alt="Ulična — Gradska tišina" class="loading" loading="lazy">
-      </div>
+    <div class="featured-item" data-title="Gradska tišina" data-sub="Ulična" data-full="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1400&q=90">
+      <div class="img-wrap"><img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=600&q=80&fit=crop" alt="Gradska tišina" loading="lazy"></div>
       <div class="overlay"><div class="overlay-content"><span class="tag">Ulična</span><h3>Gradska tišina</h3></div></div>
     </div>
-
-    <div class="masonry-item" data-cat="fashion" data-title="Svjetlost u njenim očima" data-sub="Moda" data-full="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1400&q=90">
-      <div class="img-wrap img-tall">
-        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=700&q=80&fit=crop" alt="Moda — Svjetlost u njenim očima" class="loading" loading="lazy">
-      </div>
+    <div class="featured-item" data-title="Svjetlost u njenim očima" data-sub="Moda" data-full="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1400&q=90">
+      <div class="img-wrap"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&q=80&fit=crop" alt="Svjetlost u njenim očima" loading="lazy"></div>
       <div class="overlay"><div class="overlay-content"><span class="tag">Moda</span><h3>Svjetlost u njenim očima</h3></div></div>
     </div>
-
-    <div class="masonry-item" data-cat="portrait" data-title="Samoća" data-sub="Portret" data-full="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=1400&q=90">
-      <div class="img-wrap img-wide">
-        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=700&q=80&fit=crop" alt="Portret — Samoća" class="loading" loading="lazy">
-      </div>
+    <div class="featured-item" data-title="Samoća" data-sub="Portret" data-full="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=1400&q=90">
+      <div class="img-wrap"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&q=80&fit=crop" alt="Samoća" loading="lazy"></div>
       <div class="overlay"><div class="overlay-content"><span class="tag">Portret</span><h3>Samoća</h3></div></div>
     </div>
-
-    <div class="masonry-item" data-cat="wedding" data-title="Vječna zavjesa" data-sub="Vjenčanje" data-full="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=1400&q=90">
-      <div class="img-wrap img-sq">
-        <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=700&q=80&fit=crop" alt="Vjenčanje — Vječna zavjesa" class="loading" loading="lazy">
-      </div>
+    <div class="featured-item" data-title="Vječna zavjesa" data-sub="Vjenčanje" data-full="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=1400&q=90">
+      <div class="img-wrap"><img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=600&q=80&fit=crop" alt="Vječna zavjesa" loading="lazy"></div>
       <div class="overlay"><div class="overlay-content"><span class="tag">Vjenčanje</span><h3>Vječna zavjesa</h3></div></div>
     </div>
+  </div>
 
-    <div class="masonry-item" data-cat="cinematic" data-title="Između kadrova" data-sub="Cinematska" data-full="https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?w=1400&q=90">
-      <div class="img-wrap img-tall">
-        <img src="https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?w=700&q=80&fit=crop" alt="Cinematska — Između kadrova" class="loading" loading="lazy">
+  <!-- ALBUMS -->
+  <div class="albums-header fade-in">
+    <span class="section-eyebrow">Svi albumi</span>
+  </div>
+  <div class="album-filters fade-in fade-in-delay-1">
+    <button class="filter-btn active" data-album-filter="all">Svi albumi</button>
+    <button class="filter-btn" data-album-filter="portrait">Portreti</button>
+    <button class="filter-btn" data-album-filter="wedding">Vjenčanja</button>
+    <button class="filter-btn" data-album-filter="fashion">Moda</button>
+    <button class="filter-btn" data-album-filter="cinematic">Cinematska</button>
+    <button class="filter-btn" data-album-filter="street">Ulična</button>
+    <button class="filter-btn" data-album-filter="commercial">Komercijalna</button>
+  </div>
+  <div class="albums-grid fade-in fade-in-delay-2" id="albumsGrid">
+
+    <div class="album-card" onclick="openAlbum('portrait')" data-album-key="portrait">
+      <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&q=75&fit=crop" alt="Portreti" loading="lazy">
+      <div class="album-overlay">
+        <span class="album-count">12 fotografija</span>
+        <h3 class="album-name">Portreti</h3>
+        <p class="album-sub">Karakter · Emocija · Svjetlost</p>
+        <span class="album-btn">Otvori album</span>
       </div>
-      <div class="overlay"><div class="overlay-content"><span class="tag">Cinematska</span><h3>Između kadrova</h3></div></div>
     </div>
 
-    <div class="masonry-item" data-cat="portrait" data-title="Poslijepodnevno sanjarenje" data-sub="Portret" data-full="https://images.unsplash.com/photo-1488716820095-cbe80883c496?w=1400&q=90">
-      <div class="img-wrap img-wide">
-        <img src="https://images.unsplash.com/photo-1488716820095-cbe80883c496?w=700&q=80&fit=crop" alt="Portret — Poslijepodnevno sanjarenje" class="loading" loading="lazy">
+    <div class="album-card" onclick="openAlbum('wedding')" data-album-key="wedding">
+      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=75&fit=crop" alt="Vjenčanja" loading="lazy">
+      <div class="album-overlay">
+        <span class="album-count">24 fotografije</span>
+        <h3 class="album-name">Vjenčanja</h3>
+        <p class="album-sub">Ljubav · Trenutak · Vječnost</p>
+        <span class="album-btn">Otvori album</span>
       </div>
-      <div class="overlay"><div class="overlay-content"><span class="tag">Portret</span><h3>Poslijepodnevno sanjarenje</h3></div></div>
     </div>
 
-    <div class="masonry-item" data-cat="street" data-title="Kiša u gradu" data-sub="Ulična" data-full="https://images.unsplash.com/photo-1461696114087-397271a7aedc?w=1400&q=90">
-      <div class="img-wrap img-tall">
-        <img src="https://images.unsplash.com/photo-1461696114087-397271a7aedc?w=700&q=80&fit=crop" alt="Ulična — Kiša u gradu" class="loading" loading="lazy">
+    <div class="album-card" onclick="openAlbum('fashion')" data-album-key="fashion">
+      <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&q=75&fit=crop" alt="Moda" loading="lazy">
+      <div class="album-overlay">
+        <span class="album-count">18 fotografija</span>
+        <h3 class="album-name">Moda</h3>
+        <p class="album-sub">Editorijal · Brend · Vizija</p>
+        <span class="album-btn">Otvori album</span>
       </div>
-      <div class="overlay"><div class="overlay-content"><span class="tag">Ulična</span><h3>Kiša u gradu</h3></div></div>
     </div>
 
-    <div class="masonry-item" data-cat="wedding" data-title="Nježni trenutak" data-sub="Vjenčanje" data-full="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=1400&q=90">
-      <div class="img-wrap img-sq">
-        <img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=700&q=80&fit=crop" alt="Vjenčanje — Nježni trenutak" class="loading" loading="lazy">
+    <div class="album-card" onclick="openAlbum('cinematic')" data-album-key="cinematic">
+      <img src="https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?w=800&q=75&fit=crop" alt="Cinematska" loading="lazy">
+      <div class="album-overlay">
+        <span class="album-count">9 fotografija</span>
+        <h3 class="album-name">Cinematska</h3>
+        <p class="album-sub">Film · Atmosfera · Priča</p>
+        <span class="album-btn">Otvori album</span>
       </div>
-      <div class="overlay"><div class="overlay-content"><span class="tag">Vjenčanje</span><h3>Nježni trenutak</h3></div></div>
+    </div>
+
+    <div class="album-card" onclick="openAlbum('street')" data-album-key="street">
+      <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&q=75&fit=crop" alt="Ulična" loading="lazy">
+      <div class="album-overlay">
+        <span class="album-count">15 fotografija</span>
+        <h3 class="album-name">Ulična</h3>
+        <p class="album-sub">Grad · Tišina · Život</p>
+        <span class="album-btn">Otvori album</span>
+      </div>
+    </div>
+
+    <div class="album-card" onclick="openAlbum('commercial')" data-album-key="commercial">
+      <img src="https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?w=800&q=75&fit=crop" alt="Komercijalna" loading="lazy">
+      <div class="album-overlay">
+        <span class="album-count">21 fotografija</span>
+        <h3 class="album-name">Komercijalna</h3>
+        <p class="album-sub">Produkt · Kampanja · Brend</p>
+        <span class="album-btn">Otvori album</span>
+      </div>
     </div>
 
   </div>
 </section>
+
+<!-- ALBUM MODAL -->
+<div class="album-modal" id="albumModal">
+  <div class="album-modal-header">
+    <h2 class="album-modal-title" id="albumModalTitle">Album</h2>
+    <button class="album-modal-close" onclick="closeAlbum()">Zatvori ✕</button>
+  </div>
+  <div class="album-modal-body">
+    <div class="album-masonry" id="albumMasonry"></div>
+  </div>
+</div>
 
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
@@ -519,7 +692,7 @@
         </div>
         <div class="contact-detail">
           <div class="contact-detail-icon"><svg viewBox="0 0 16 16"><circle cx="8" cy="7" r="3"/><path d="M8 1C5.2 1 3 3.2 3 6c0 4 5 9 5 9s5-5 5-9c0-2.8-2.2-5-5-5z"/></svg></div>
-          <div class="contact-detail-text"><span class="contact-detail-label">Lokacija</span><span class="contact-detail-val">Ploče · Ljubuski · Dostupna diljem Europe</span></div>
+          <div class="contact-detail-text"><span class="contact-detail-label">Lokacija</span><span class="contact-detail-val">Ploče · Ljubuški · Dostupna diljem Europe</span></div>
         </div>
       </div>
       <div class="social-links">
@@ -563,93 +736,252 @@
 </footer>
 
 <script>
+// ─── CURSOR ───
 const cursor = document.getElementById('cursor'), ring = document.getElementById('cursorRing');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
 setInterval(()=>{rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';},16);
-document.querySelectorAll('a,button,.masonry-item,.service-card,.filter-btn').forEach(el=>{
+document.querySelectorAll('a,button,.featured-item,.service-card,.album-card').forEach(el=>{
   el.addEventListener('mouseenter',()=>{cursor.classList.add('hover');ring.classList.add('hover');});
   el.addEventListener('mouseleave',()=>{cursor.classList.remove('hover');ring.classList.remove('hover');});
 });
 
-window.addEventListener('scroll',()=>{ document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60); });
+// ─── NAVBAR SCROLL ───
+let lastScroll = 0;
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll',()=>{
+  const current = window.scrollY;
+  navbar.classList.toggle('scrolled', current > 60);
+  if(window.innerWidth <= 768){
+    if(current > lastScroll && current > 80){
+      navbar.style.transform = 'translateY(-100%)';
+    } else {
+      navbar.style.transform = 'translateY(0)';
+    }
+  }
+  lastScroll = current;
+});
 
+// ─── FADE IN ───
 const obs = new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:.1});
 document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
 
-document.querySelectorAll('.masonry-item img').forEach(img=>{
-  img.addEventListener('load',()=>img.classList.replace('loading','loaded'));
-  if(img.complete) img.classList.replace('loading','loaded');
-});
+// ─── MOBILE MENU ───
+function openMobileMenu(){document.getElementById('mobileMenu').classList.add('open');document.getElementById('hamburger').style.display='none';}
+function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('open');document.getElementById('hamburger').style.display='flex';}
 
-function openMobileMenu(){
-  document.getElementById('mobileMenu').classList.add('open');
-  document.getElementById('hamburger').style.display='none';
-}
-function closeMobileMenu(){
-  document.getElementById('mobileMenu').classList.remove('open');
-  document.getElementById('hamburger').style.display='flex';
-}
-
-const items = document.querySelectorAll('.masonry-item');
-const gallery = document.getElementById('gallery');
-
-document.querySelectorAll('.filter-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelector('.filter-btn.active').classList.remove('active');
-    btn.classList.add('active');
-    const f = btn.dataset.filter;
-    [...items].forEach(item=>{
-      item.style.transition = 'opacity .25s ease, transform .25s ease';
-      item.style.opacity = '0';
-      item.style.transform = 'translateY(8px)';
-    });
-    setTimeout(()=>{
-      const matched = [...items].filter(i => f==='all' || i.dataset.cat===f);
-      const rest    = [...items].filter(i => f!=='all' && i.dataset.cat!==f);
-      matched.forEach(i => gallery.appendChild(i));
-      rest.forEach(i => gallery.appendChild(i));
-      matched.forEach((item, idx)=>{
-        item.style.transition = `opacity .4s ease ${idx*0.05}s, transform .4s ease ${idx*0.05}s`;
-        item.style.opacity = '1';
-        item.style.transform = 'translateY(0)';
-        item.style.pointerEvents = 'auto';
-      });
-      rest.forEach(item=>{
-        item.style.transition = 'opacity .4s ease, transform .4s ease';
-        item.style.opacity = '0.1';
-        item.style.transform = 'translateY(0)';
-        item.style.pointerEvents = 'none';
-      });
-    }, 280);
-  });
-});
-
-let currentIdx=0;
-items.forEach(item=>item.addEventListener('click',()=>{
-  const live=[...document.querySelectorAll('.masonry-item')];
-  openLightbox(live.indexOf(item));
-}));
-function openLightbox(i){
-  currentIdx=i;
-  const item=document.querySelectorAll('.masonry-item')[i];
-  document.getElementById('lightboxImg').src=item.dataset.full||item.querySelector('img').src;
-  document.getElementById('lightboxImg').alt=item.querySelector('img').alt;
-  document.getElementById('lightboxTitle').textContent=item.dataset.title;
-  document.getElementById('lightboxSub').textContent=item.dataset.sub;
-  document.getElementById('lightbox').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-function closeLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
-function lightboxNav(dir){const live=document.querySelectorAll('.masonry-item');let n=currentIdx+dir;if(n<0)n=live.length-1;if(n>=live.length)n=0;openLightbox(n);}
-document.getElementById('lightbox').addEventListener('click',e=>{if(e.target===document.getElementById('lightbox'))closeLightbox();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();if(e.key==='ArrowRight')lightboxNav(1);if(e.key==='ArrowLeft')lightboxNav(-1);});
-
+// ─── HERO PARALLAX ───
 window.addEventListener('scroll',()=>{
   const el=document.getElementById('heroBg');
   if(el) el.style.transform=`translateY(${window.scrollY*.3}px)`;
 });
 
+// ─── FEATURED LIGHTBOX ───
+let lightboxItems = [];
+let currentIdx = 0;
+
+document.querySelectorAll('.featured-item').forEach((item,i)=>{
+  item.addEventListener('click',()=>openLightbox(i, document.querySelectorAll('.featured-item')));
+});
+
+function openLightbox(i, items){
+  lightboxItems = [...items];
+  currentIdx = i;
+  const item = lightboxItems[i];
+  document.getElementById('lightboxImg').src = item.dataset.full || item.querySelector('img').src;
+  document.getElementById('lightboxImg').alt = item.querySelector('img').alt;
+  document.getElementById('lightboxTitle').textContent = item.dataset.title || '';
+  document.getElementById('lightboxSub').textContent = item.dataset.sub || '';
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
+function lightboxNav(dir){let n=currentIdx+dir;if(n<0)n=lightboxItems.length-1;if(n>=lightboxItems.length)n=0;openLightbox(n,lightboxItems);}
+document.getElementById('lightbox').addEventListener('click',e=>{if(e.target===document.getElementById('lightbox'))closeLightbox();});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){closeLightbox();closeAlbum();}
+  if(e.key==='ArrowRight')lightboxNav(1);
+  if(e.key==='ArrowLeft')lightboxNav(-1);
+});
+
+// ─── ALBUM DATA ───
+const albumData = {
+  portrait: {
+    title: 'Portreti',
+    photos: [
+      {src:'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=700&q=80',full:'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=1400&q=90',title:'Zlatni sat',sub:'Portret'},
+      {src:'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=700&q=80',full:'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=1400&q=90',title:'Samoća',sub:'Portret'},
+      {src:'https://images.unsplash.com/photo-1488716820095-cbe80883c496?w=700&q=80',full:'https://images.unsplash.com/photo-1488716820095-cbe80883c496?w=1400&q=90',title:'Poslijepodnevno sanjarenje',sub:'Portret'},
+      {src:'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=700&q=80',full:'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=1400&q=90',title:'Jutarnji sjaj',sub:'Portret'},
+      {src:'https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=700&q=80',full:'https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=1400&q=90',title:'Tihi trenutak',sub:'Portret'},
+      {src:'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=700&q=80',full:'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=1400&q=90',title:'Ljetna svjetlost',sub:'Portret'},
+    ]
+  },
+  wedding: {
+    title: 'Vjenčanja',
+    photos: [
+      {src:'https://images.unsplash.com/photo-1519741497674-611481863552?w=700&q=80',full:'https://images.unsplash.com/photo-1519741497674-611481863552?w=1400&q=90',title:'Prvo jutro',sub:'Vjenčanje'},
+      {src:'https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=700&q=80',full:'https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=1400&q=90',title:'Vječna zavjesa',sub:'Vjenčanje'},
+      {src:'https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=700&q=80',full:'https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=1400&q=90',title:'Nježni trenutak',sub:'Vjenčanje'},
+      {src:'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=700&q=80',full:'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1400&q=90',title:'Vjenčani ples',sub:'Vjenčanje'},
+      {src:'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=700&q=80',full:'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1400&q=90',title:'Prstenovi',sub:'Vjenčanje'},
+      {src:'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=700&q=80',full:'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=1400&q=90',title:'Pogled u vječnost',sub:'Vjenčanje'},
+    ]
+  },
+  fashion: {
+    title: 'Moda',
+    photos: [
+      {src:'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=700&q=80',full:'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1400&q=90',title:'Noir editorijal',sub:'Moda'},
+      {src:'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=700&q=80',full:'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1400&q=90',title:'Svjetlost u njenim očima',sub:'Moda'},
+      {src:'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=700&q=80',full:'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1400&q=90',title:'Proljetna kolekcija',sub:'Moda'},
+      {src:'https://images.unsplash.com/photo-1558171813-0de1e96b1e9e?w=700&q=80',full:'https://images.unsplash.com/photo-1558171813-0de1e96b1e9e?w=1400&q=90',title:'Bijela jednostavnost',sub:'Moda'},
+      {src:'https://images.unsplash.com/photo-1445205170230-053b83016050?w=700&q=80',full:'https://images.unsplash.com/photo-1445205170230-053b83016050?w=1400&q=90',title:'Jesenski tonovi',sub:'Moda'},
+    ]
+  },
+  cinematic: {
+    title: 'Cinematska',
+    photos: [
+      {src:'https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?w=700&q=80',full:'https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?w=1400&q=90',title:'Sumrak',sub:'Cinematska'},
+      {src:'https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?w=700&q=80',full:'https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?w=1400&q=90',title:'Između kadrova',sub:'Cinematska'},
+      {src:'https://images.unsplash.com/photo-1509248961158-e54f6934749c?w=700&q=80',full:'https://images.unsplash.com/photo-1509248961158-e54f6934749c?w=1400&q=90',title:'Noćna scena',sub:'Cinematska'},
+      {src:'https://images.unsplash.com/photo-1518895312237-a9e23508077d?w=700&q=80',full:'https://images.unsplash.com/photo-1518895312237-a9e23508077d?w=1400&q=90',title:'Plava magla',sub:'Cinematska'},
+    ]
+  },
+  street: {
+    title: 'Ulična',
+    photos: [
+      {src:'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=700&q=80',full:'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1400&q=90',title:'Gradska tišina',sub:'Ulična'},
+      {src:'https://images.unsplash.com/photo-1461696114087-397271a7aedc?w=700&q=80',full:'https://images.unsplash.com/photo-1461696114087-397271a7aedc?w=1400&q=90',title:'Kiša u gradu',sub:'Ulična'},
+      {src:'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=700&q=80',full:'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=1400&q=90',title:'Metropolit',sub:'Ulična'},
+      {src:'https://images.unsplash.com/photo-1494522358652-f30e61a60313?w=700&q=80',full:'https://images.unsplash.com/photo-1494522358652-f30e61a60313?w=1400&q=90',title:'Jutarnji prolaznik',sub:'Ulična'},
+    ]
+  },
+  commercial: {
+    title: 'Komercijalna',
+    photos: [
+      {src:'https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?w=700&q=80',full:'https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?w=1400&q=90',title:'Produkt kampanja',sub:'Komercijalna'},
+      {src:'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=700&q=80',full:'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1400&q=90',title:'Retail editorijal',sub:'Komercijalna'},
+      {src:'https://images.unsplash.com/photo-1523381294911-8d3cead13475?w=700&q=80',full:'https://images.unsplash.com/photo-1523381294911-8d3cead13475?w=1400&q=90',title:'Modni brend',sub:'Komercijalna'},
+      {src:'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=700&q=80',full:'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1400&q=90',title:'Lifestyle kampanja',sub:'Komercijalna'},
+      {src:'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=700&q=80',full:'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1400&q=90',title:'Luksuzni lookbook',sub:'Komercijalna'},
+    ]
+  }
+};
+
+// ─── ALBUM OPEN/CLOSE ───
+function openAlbum(key){
+  const data = albumData[key];
+  if(!data) return;
+  document.getElementById('albumModalTitle').textContent = data.title;
+  const masonry = document.getElementById('albumMasonry');
+  masonry.innerHTML = '';
+  data.photos.forEach((photo, i)=>{
+    const div = document.createElement('div');
+    div.className = 'album-masonry-item';
+    div.innerHTML = `
+      <img src="${photo.src}" alt="${photo.title}" loading="lazy" style="opacity:0;transition:opacity .4s ease ${i*0.05}s">
+      <div class="overlay"><span>Otvori</span></div>
+    `;
+    div.querySelector('img').addEventListener('load', e => e.target.style.opacity = '1');
+    div.addEventListener('click', ()=>{
+      openAlbumLightbox(i, data.photos);
+    });
+    masonry.appendChild(div);
+  });
+  document.getElementById('albumModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeAlbum(){
+  document.getElementById('albumModal').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function openAlbumLightbox(i, photos){
+  lightboxItems = photos.map(p=>({
+    dataset: {full: p.full, title: p.title, sub: p.sub},
+    querySelector: ()=>({alt: p.title, src: p.src})
+  }));
+  currentIdx = i;
+  document.getElementById('lightboxImg').src = photos[i].full;
+  document.getElementById('lightboxImg').alt = photos[i].title;
+  document.getElementById('lightboxTitle').textContent = photos[i].title;
+  document.getElementById('lightboxSub').textContent = photos[i].sub;
+  document.getElementById('lightbox').classList.add('open');
+}
+
+// ─── FLOATING CONTACT ───
+let floatOpen = false;
+function toggleFloat(){
+  floatOpen = !floatOpen;
+  document.getElementById('floatMainBtn').classList.toggle('active', floatOpen);
+  document.getElementById('floatOptions').classList.toggle('open', floatOpen);
+}
+// Close when clicking outside
+document.addEventListener('click', e=>{
+  if(floatOpen && !document.getElementById('floatContact').contains(e.target)){
+    floatOpen = false;
+    document.getElementById('floatMainBtn').classList.remove('active');
+    document.getElementById('floatOptions').classList.remove('open');
+  }
+});
+
+// Show float button only when contact section is visible
+const contactObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    document.getElementById('floatContact').classList.toggle('visible', e.isIntersecting);
+    if(!e.isIntersecting){ floatOpen=false; document.getElementById('floatMainBtn').classList.remove('active'); document.getElementById('floatOptions').classList.remove('open'); }
+  });
+},{threshold:.15});
+contactObs.observe(document.getElementById('contact'));
+
+// ─── ALBUM FILTERS ───
+// Store original order once
+const albumsGrid = document.getElementById('albumsGrid');
+const originalOrder = [...albumsGrid.querySelectorAll('.album-card')];
+
+document.querySelectorAll('[data-album-filter]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelector('[data-album-filter].active').classList.remove('active');
+    btn.classList.add('active');
+    // Auto-scroll filter bar
+    const bar = btn.parentElement;
+    bar.scrollTo({ left: btn.offsetLeft - bar.offsetLeft, behavior: 'smooth' });
+
+    const f = btn.dataset.albumFilter;
+
+    if(f === 'all'){
+      // Restore original order
+      originalOrder.forEach(card => albumsGrid.appendChild(card));
+      originalOrder.forEach(card => {
+        card.style.transition = 'opacity .35s ease, transform .35s ease';
+        card.style.opacity = '1';
+        card.style.pointerEvents = 'auto';
+        card.style.transform = 'scale(1)';
+      });
+    } else {
+      // Find active card and move to top, rest follow in original order
+      const activeCard = albumsGrid.querySelector('[data-album-key="' + f + '"]');
+      if(activeCard){
+        albumsGrid.prepend(activeCard);
+        // Re-append the rest in original order (skipping active)
+        originalOrder.forEach(card => {
+          if(card !== activeCard) albumsGrid.appendChild(card);
+        });
+      }
+      // Update opacity
+      albumsGrid.querySelectorAll('.album-card').forEach(card => {
+        card.style.transition = 'opacity .35s ease, transform .35s ease';
+        const isActive = card.dataset.albumKey === f;
+        card.style.opacity = isActive ? '1' : '0.25';
+        card.style.pointerEvents = isActive ? 'auto' : 'none';
+        card.style.transform = isActive ? 'scale(1)' : 'scale(0.97)';
+      });
+    }
+  });
+});
+
+// ─── FORM SUBMIT ───
 function handleSubmit(btn){
   const orig=btn.textContent;
   btn.textContent='Poruka poslana ✓';
